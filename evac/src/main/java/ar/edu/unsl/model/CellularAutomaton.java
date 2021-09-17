@@ -24,11 +24,13 @@ public class CellularAutomaton implements Enviroment {
         this.height = height;
         this.cells = new Cell[this.width][this.height];
 
-        for (int i = 0; i < this.width; i++) {
-            for (int j = 0; j < this.width; j++) {
+        for (int i = 0; i < this.width; i++)
+            for (int j = 0; j < this.width; j++)
                 this.cells[i][j] = new Cell(new DefaultDefinition());
-            }
-        }
+
+        // for (int i = 0; i < this.width; i++)
+        // for (int j = 0; j < this.width; j++)
+        // this.cells[i][j].setNeighborhood();
     }
 
     // =========================== getters and setters ===========================

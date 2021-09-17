@@ -49,6 +49,6 @@ public class Engine {
     }
 
     public void generateReport() {
-
+        System.err.println("No implementation yet");
     }
 }

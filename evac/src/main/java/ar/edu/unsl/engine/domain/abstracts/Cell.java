@@ -9,6 +9,7 @@ public class Cell {
 
     public Cell(CellDefinition definition) {
         this.definition = definition;
+        this.definition.setUp(this.agent, this.neighborhood);
     }
 
     // =========================== getters and setters ===========================
@@ -18,6 +19,7 @@ public class Cell {
 
     public void setAgent(Agent agent) {
         this.agent = agent;
+        this.definition.setUp(agent, neighborhood);
     }
 
     public Cell[] getNeighborhood() {

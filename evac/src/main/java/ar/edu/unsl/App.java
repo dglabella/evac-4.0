@@ -1,11 +1,12 @@
 package ar.edu.unsl;
 
-import ar.edu.unsl.model.CellularAutomaton;
+import ar.edu.unsl.engine.Engine;
 
 public final class App {
 
     private final static int WIDTH = 8;
     private final static int HEIGHT = 8;
+    private final static int SUBSTEPS = 10;
 
     private App() {
 
@@ -13,17 +14,11 @@ public final class App {
 
     public static void main(String[] args) {
 
-        CellularAutomaton enviroment = new CellularAutomaton(WIDTH, HEIGHT);
-        for (int i = 0; i < enviroment.getWidth(); i++) {
-            for (int j = 0; j < enviroment.getHeight(); j++) {
-                double random = Math.random();
-                if (random < 0.33) {
-                    enviroment.getCells()[i][j].setDefinition(definition);
-                }
+        EnviromentGenerator mapGenerator = new EnviromentGenerator();
+        Engine engine =
+                new Engine(mapGenerator.generateEnviroment(App.WIDTH, App.HEIGHT), App.SUBSTEPS);
 
-            }
-        }
-
-        enviroment.evolve();
+        engine.execute();
+        engine.generateReport();
     }
 }
