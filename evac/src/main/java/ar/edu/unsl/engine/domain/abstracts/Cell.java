@@ -1,16 +1,25 @@
 package ar.edu.unsl.engine.domain.abstracts;
 
+import java.util.List;
+
 public class Cell {
 
+    private int i;
+    private int j;
+
     private Agent agent;
-    private Cell[] neighborhood;
+    private List<int[]> neighborhood;
 
     private CellDefinition definition;
 
     private int pathUsabilityFrequencyCounter;
 
-    public Cell(CellDefinition definition) {
+    public Cell(int i, int j, CellDefinition definition) {
+        this.i = i;
+        this.j = j;
         this.definition = definition;
+
+        this.neighborhood = this.definition.setUpNeighborhood(i, j);
         this.definition.setUp(this.agent, this.neighborhood);
     }
 
@@ -24,12 +33,8 @@ public class Cell {
         this.definition.setUp(agent, neighborhood);
     }
 
-    public Cell[] getNeighborhood() {
+    public List<int[]> getNeighborhood() {
         return this.neighborhood;
-    }
-
-    public void setNeighborhood(Cell[] neighborhood) {
-        this.neighborhood = neighborhood;
     }
 
     public CellDefinition getDefinition() {

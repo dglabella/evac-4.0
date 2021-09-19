@@ -3,7 +3,6 @@ package ar.edu.unsl.model;
 import ar.edu.unsl.engine.domain.DefaultDefinition;
 import ar.edu.unsl.engine.domain.abstracts.Cell;
 import ar.edu.unsl.engine.domain.abstracts.Enviroment;
-import ar.edu.unsl.model.neighborhoods.Neighborhood;
 
 public class CellularAutomaton implements Enviroment {
 
@@ -13,25 +12,26 @@ public class CellularAutomaton implements Enviroment {
     private int height;
 
     /**
-     * The cellular automaton will be instantiated with size width * height. Every
-     * cell will be instantiated with a Default definition.
+     * The cellular automaton will be instantiated with size width * height. Every cell will be
+     * instantiated with a Default definition.
      * 
-     * @param width  The width.
+     * @param width The width.
      * @param height The height.
      * 
      */
-    public CellularAutomaton(int width, int height, Neighborhood neighborhood) {
+    public CellularAutomaton(int width, int height) {
         this.width = width;
         this.height = height;
         this.cells = new Cell[this.width][this.height];
 
-        for (int i = 0; i < this.width; i++)
+        for (int i = 0; i < this.height; i++)
             for (int j = 0; j < this.width; j++)
-                this.cells[i][j] = new Cell(new DefaultDefinition());
+                this.cells[i][j] = new Cell(i, j, new DefaultDefinition());
 
-        for (int i = 0; i < this.width; i++)
-            for (int j = 0; j < this.width; j++)
-                this.cells[i][j].setNeighborhood(neighborhood.calculate());
+        for (int i = 0; i < this.height; i++)
+            for (int j = 0; j < this.width; j++) {
+                this.cells[i][j].getNeighborhood().add(new int[] {i - 1, j - 1});
+            }
     }
 
     // =========================== getters and setters ===========================

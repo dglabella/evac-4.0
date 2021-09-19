@@ -1,20 +1,12 @@
 package ar.edu.unsl.model.definitions;
 
+import java.util.List;
 import ar.edu.unsl.engine.domain.abstracts.Agent;
-import ar.edu.unsl.engine.domain.abstracts.Cell;
 import ar.edu.unsl.engine.domain.abstracts.CellDefinition;
 
 public class Wall implements CellDefinition {
 
     private float resistance;
-
-    public float getResistance() {
-        return this.resistance;
-    }
-
-    public void setResistance(float resistance) {
-        this.resistance = resistance;
-    }
 
     @Override
     public void setUp(Agent agent) {
@@ -23,9 +15,15 @@ public class Wall implements CellDefinition {
     }
 
     @Override
-    public void setUp(Agent agent, Cell[] neighborhood) {
+    public void setUp(Agent agent, List<int[]> neighborhood) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public List<int[]> setUpNeighborhood(int i, int j) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
@@ -45,4 +43,6 @@ public class Wall implements CellDefinition {
         // TODO Auto-generated method stub
         return null;
     }
+
+
 }

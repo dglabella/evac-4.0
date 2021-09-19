@@ -1,13 +1,16 @@
 package ar.edu.unsl.model.definitions;
 
+import java.util.List;
 import ar.edu.unsl.engine.domain.abstracts.Agent;
-import ar.edu.unsl.engine.domain.abstracts.Cell;
 import ar.edu.unsl.engine.domain.abstracts.CellDefinition;
+import ar.edu.unsl.model.definitions.elements.Fire;
+import ar.edu.unsl.model.definitions.elements.Smoke;
+import ar.edu.unsl.model.neighborhoods.Neighborhood;
 
-public class EvacDefinition implements CellDefinition {
+public class Space implements CellDefinition {
 
-    private float fire;
-    private float smoke;
+    private Fire fire;
+    private Smoke smoke;
 
     @Override
     public void setUp(Agent agent) {
@@ -16,13 +19,20 @@ public class EvacDefinition implements CellDefinition {
     }
 
     @Override
-    public void setUp(Agent agent, Cell[] neighborhood) {
+    public void setUp(Agent agent, List<int[]> neighborhood) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
+    public List<int[]> setUpNeighborhood(int i, int j) {
+        int sizeFactor = 1;
+        return Neighborhood.Moore(i, j, sizeFactor, false);
+    }
+
+    @Override
     public void applyRule() {
+        // TODO Auto-generated method stub
 
     }
 
@@ -37,5 +47,6 @@ public class EvacDefinition implements CellDefinition {
         // TODO Auto-generated method stub
         return null;
     }
+
 
 }
