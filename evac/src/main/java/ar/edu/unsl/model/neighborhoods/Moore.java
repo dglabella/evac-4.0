@@ -1,5 +1,14 @@
 package ar.edu.unsl.model.neighborhoods;
 
-public class Moore {
+import ar.edu.unsl.engine.domain.abstracts.Cell;
+
+public class Moore implements Neighborhood {
+
+    @Override
+    public Cell[] calculate() {
+        Cell[] ret = null;
+
+        return ret;
+    }
 
 }

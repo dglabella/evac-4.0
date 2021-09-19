@@ -7,6 +7,8 @@ public class Cell {
 
     private CellDefinition definition;
 
+    private int pathUsabilityFrequencyCounter;
+
     public Cell(CellDefinition definition) {
         this.definition = definition;
         this.definition.setUp(this.agent, this.neighborhood);
@@ -36,5 +38,13 @@ public class Cell {
 
     public void setDefinition(CellDefinition definition) {
         this.definition = definition;
+    }
+
+    public int getPathUsabilityFrequencyCounter() {
+        return this.pathUsabilityFrequencyCounter;
+    }
+
+    public void incrementPathUsabilityFrequencyCounter() {
+        this.pathUsabilityFrequencyCounter++;
     }
 }

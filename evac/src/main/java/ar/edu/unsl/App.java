@@ -14,10 +14,7 @@ public final class App {
 
     public static void main(String[] args) {
 
-        EnviromentGenerator mapGenerator = new EnviromentGenerator();
-        Engine engine =
-                new Engine(mapGenerator.generateEnviroment(App.WIDTH, App.HEIGHT), App.SUBSTEPS);
-
+        Engine engine = new Engine(new EnviromentGenerator().generateEnviroment(App.WIDTH, App.HEIGHT), App.SUBSTEPS);
         engine.execute();
         engine.generateReport();
     }

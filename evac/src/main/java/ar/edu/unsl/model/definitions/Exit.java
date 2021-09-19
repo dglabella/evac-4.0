@@ -4,17 +4,7 @@ import ar.edu.unsl.engine.domain.abstracts.Agent;
 import ar.edu.unsl.engine.domain.abstracts.Cell;
 import ar.edu.unsl.engine.domain.abstracts.CellDefinition;
 
-public class Grass implements CellDefinition {
-
-    private float dryness;
-
-    public float getDryness() {
-        return this.dryness;
-    }
-
-    public void setDryness(float dryness) {
-        this.dryness = dryness;
-    }
+public class Exit implements CellDefinition {
 
     @Override
     public void setUp(Agent agent) {
@@ -45,4 +35,5 @@ public class Grass implements CellDefinition {
         // TODO Auto-generated method stub
         return null;
     }
+
 }

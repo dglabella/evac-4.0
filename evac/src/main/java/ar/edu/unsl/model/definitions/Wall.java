@@ -4,29 +4,28 @@ import ar.edu.unsl.engine.domain.abstracts.Agent;
 import ar.edu.unsl.engine.domain.abstracts.Cell;
 import ar.edu.unsl.engine.domain.abstracts.CellDefinition;
 
-public class Fire implements CellDefinition {
+public class Wall implements CellDefinition {
 
-    private float temp;
-    private Agent agent;
-    private Cell[] neighborhood;
+    private float resistance;
 
-    public float getTemp() {
-        return this.temp;
+    public float getResistance() {
+        return this.resistance;
     }
 
-    public void setTemp(float temp) {
-        this.temp = temp;
+    public void setResistance(float resistance) {
+        this.resistance = resistance;
     }
 
     @Override
     public void setUp(Agent agent) {
-        this.agent = agent;
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void setUp(Agent agent, Cell[] neighborhood) {
-        this.agent = agent;
-        this.neighborhood = neighborhood;
+        // TODO Auto-generated method stub
+
     }
 
     @Override
