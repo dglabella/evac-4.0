@@ -12,10 +12,10 @@ public class CellularAutomaton implements Enviroment {
     private int height;
 
     /**
-     * The cellular automaton will be instantiated with size width * height. Every cell will be
-     * instantiated with a Default definition.
+     * The cellular automaton will be instantiated with size width * height. Every
+     * cell will be instantiated with a Default definition.
      * 
-     * @param width The width.
+     * @param width  The width.
      * @param height The height.
      * 
      */
@@ -30,7 +30,7 @@ public class CellularAutomaton implements Enviroment {
 
         for (int i = 0; i < this.height; i++)
             for (int j = 0; j < this.width; j++) {
-                this.cells[i][j].getNeighborhood().add(new int[] {i - 1, j - 1});
+                this.cells[i][j].getNeighborhood().add(new int[] { i - 1, j - 1 });
             }
     }
 
