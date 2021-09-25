@@ -5,4 +5,6 @@ public interface Enviroment {
     int agentsRemaining();
 
     void evolve();
+
+    void generateView();
 }

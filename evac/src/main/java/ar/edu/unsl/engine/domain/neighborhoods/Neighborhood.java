@@ -1,4 +1,4 @@
-package ar.edu.unsl.model.neighborhoods;
+package ar.edu.unsl.engine.domain.neighborhoods;
 
 import java.util.ArrayList;
 import java.util.List;

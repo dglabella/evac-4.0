@@ -21,13 +21,13 @@ public class Wall implements CellDefinition {
     }
 
     @Override
-    public List<int[]> setUpNeighborhood(int i, int j) {
+    public List<int[]> setUpNeighborhood(int i, int j, int width, int height) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void applyRule() {
+    public void applyRule(List<CellDefinition> neighborhood) {
         // TODO Auto-generated method stub
 
     }
@@ -43,6 +43,4 @@ public class Wall implements CellDefinition {
         // TODO Auto-generated method stub
         return null;
     }
-
-
 }

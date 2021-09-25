@@ -1,6 +1,8 @@
-package ar.edu.unsl.engine.domain.abstracts;
+package ar.edu.unsl.engine.domain.concretes;
 
 import java.util.List;
+import ar.edu.unsl.engine.domain.abstracts.Agent;
+import ar.edu.unsl.engine.domain.abstracts.CellDefinition;
 
 public class Cell {
 
@@ -18,12 +20,19 @@ public class Cell {
         this.i = i;
         this.j = j;
         this.definition = definition;
-
-        this.neighborhood = this.definition.setUpNeighborhood(i, j);
+        this.neighborhood = this.definition.setUpNeighborhood(i, j, CellularAutomaton.width, CellularAutomaton.height);
         this.definition.setUp(this.agent, this.neighborhood);
     }
 
     // =========================== getters and setters ===========================
+    public int getI() {
+        return this.i;
+    }
+
+    public int getJ() {
+        return this.j;
+    }
+
     public Agent getAgent() {
         return this.agent;
     }

@@ -43,7 +43,10 @@ public class Engine {
     }
 
     public void execute() {
-        while (this.enviroment.agentsRemaining() > 0) {
+        // while (this.enviroment.agentsRemaining() > 0) {
+        // this.timeStep();
+        // }
+        for (int n = 0; n < 10000; n++) {
             this.timeStep();
         }
     }
