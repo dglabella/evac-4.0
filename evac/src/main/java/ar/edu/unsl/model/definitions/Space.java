@@ -1,5 +1,6 @@
 package ar.edu.unsl.model.definitions;
 
+import java.util.ArrayList;
 import java.util.List;
 import ar.edu.unsl.engine.domain.abstracts.Agent;
 import ar.edu.unsl.engine.domain.abstracts.CellDefinition;
@@ -27,7 +28,9 @@ public class Space implements CellDefinition {
     @Override
     public List<int[]> setUpNeighborhood(int i, int j) {
         int sizeFactor = 1;
-        return Neighborhood.Moore(i, j, sizeFactor, false);
+        // return Neighborhood.Moore(i, j, sizeFactor, false);
+
+        return new ArrayList<>();
     }
 
     @Override
@@ -47,6 +50,5 @@ public class Space implements CellDefinition {
         // TODO Auto-generated method stub
         return null;
     }
-
 
 }
