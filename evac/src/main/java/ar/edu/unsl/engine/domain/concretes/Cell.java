@@ -20,7 +20,8 @@ public class Cell {
         this.i = i;
         this.j = j;
         this.definition = definition;
-        this.neighborhood = this.definition.setUpNeighborhood(i, j, CellularAutomaton.width, CellularAutomaton.height);
+        this.neighborhood = this.definition.setUpNeighborhood(i, j, CellularAutomaton.width,
+                CellularAutomaton.height);
         this.definition.setUp(this.agent, this.neighborhood);
     }
 
@@ -39,7 +40,7 @@ public class Cell {
 
     public void setAgent(Agent agent) {
         this.agent = agent;
-        this.definition.setUp(agent, neighborhood);
+
     }
 
     public List<int[]> getNeighborhood() {
@@ -52,6 +53,9 @@ public class Cell {
 
     public void setDefinition(CellDefinition definition) {
         this.definition = definition;
+        this.neighborhood = this.definition.setUpNeighborhood(i, j, CellularAutomaton.width,
+                CellularAutomaton.height);
+        this.definition.setUp(this.agent, this.neighborhood);
     }
 
     public int getPathUsabilityFrequencyCounter() {

@@ -16,7 +16,8 @@ public class EnviromentGenerator {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < height; j++) {
 
-                enviroment.getCells()[i][j].setDefinition(new GameOfLife(random.nextDouble() < 0.3 ? true : false));
+                enviroment.getCells()[i][j]
+                        .setDefinition(new GameOfLife(random.nextDouble() < 0.3 ? true : false));
             }
         }
 
