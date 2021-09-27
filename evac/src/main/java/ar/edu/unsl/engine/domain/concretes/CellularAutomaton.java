@@ -16,10 +16,10 @@ public class CellularAutomaton implements Enviroment {
     private List<CellDefinition> neighboorhoodHolder = new ArrayList<>();
 
     /**
-     * The cellular automaton will be instantiated with size width * height. Every cell will be
-     * instantiated with a Default definition.
+     * The cellular automaton will be instantiated with size width * height. Every
+     * cell will be instantiated with a Default definition.
      * 
-     * @param width The width.
+     * @param width  The width.
      * @param height The height.
      * 
      */
@@ -53,8 +53,7 @@ public class CellularAutomaton implements Enviroment {
     private void fillNeighborhoodHolder(List<int[]> neighborhoodCoords) {
         for (int i = 0; i < neighborhoodCoords.size(); i++) {
             this.neighboorhoodHolder
-                    .add(this.cells[neighborhoodCoords.get(i)[0]][neighborhoodCoords.get(i)[1]]
-                            .getDefinition());
+                    .add(this.cells[neighborhoodCoords.get(i)[0]][neighborhoodCoords.get(i)[1]].getDefinition());
         }
     }
 
@@ -68,6 +67,7 @@ public class CellularAutomaton implements Enviroment {
     public void evolve() {
         for (int i = 0; i < this.width; i++) {
             for (int j = 0; j < this.height; j++) {
+                this.neighboorhoodHolder.clear();
                 this.fillNeighborhoodHolder(this.cells[i][j].getNeighborhood());
                 this.cells[i][j].getDefinition().applyRule(this.neighboorhoodHolder);
             }
@@ -80,11 +80,17 @@ public class CellularAutomaton implements Enviroment {
 
     @Override
     public void generateView() {
+        System.out.println("--------------------------");
         for (int i = 0; i < this.width; i++) {
+            System.out.print("|");
             for (int j = 0; j < this.height; j++) {
                 System.out.print(this.cells[i][j].getDefinition().getCodification());
             }
-            System.out.println();
+            System.out.println("|");
         }
+        System.out.println("--------------------------");
+
+        // System.out.print("\033[H\033[2J");
+        // System.out.flush();
     }
 }

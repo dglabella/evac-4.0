@@ -10,6 +10,9 @@ public class GameOfLife implements CellDefinition {
     private boolean alive = false;
     private boolean postAlive = false;
 
+    private int i;
+    private int j;
+
     public GameOfLife(boolean isAlive) {
         this.alive = isAlive;
     }
@@ -17,6 +20,10 @@ public class GameOfLife implements CellDefinition {
     // =========================== getters and setters ===========================
     public boolean isAlive() {
         return this.alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 
     @Override
@@ -33,7 +40,8 @@ public class GameOfLife implements CellDefinition {
 
     @Override
     public List<int[]> setUpNeighborhood(int i, int j, int width, int height) {
-
+        this.i = i;
+        this.j = j;
         try {
             return Neighborhood.Moore(i, j, 1, width, height, false);
         } catch (Exception e) {
@@ -49,6 +57,7 @@ public class GameOfLife implements CellDefinition {
             if (((GameOfLife) neighborhood.get(i)).isAlive())
                 neighborsAlive++;
         }
+        System.out.println("(" + this.i + "," + this.j + ") -> alive neighbors = " + neighborsAlive);
 
         if (neighborsAlive >= 2) {
             this.postAlive = true;
@@ -64,6 +73,6 @@ public class GameOfLife implements CellDefinition {
 
     @Override
     public String getCodification() {
-        return this.isAlive() ? "#" : " ";
+        return this.isAlive() ? " # " : "   ";
     }
 }

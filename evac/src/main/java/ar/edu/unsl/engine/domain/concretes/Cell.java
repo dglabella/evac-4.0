@@ -20,8 +20,7 @@ public class Cell {
         this.i = i;
         this.j = j;
         this.definition = definition;
-        this.neighborhood = this.definition.setUpNeighborhood(i, j, CellularAutomaton.width,
-                CellularAutomaton.height);
+        this.neighborhood = this.definition.setUpNeighborhood(i, j, CellularAutomaton.width, CellularAutomaton.height);
         this.definition.setUp(this.agent, this.neighborhood);
     }
 
@@ -53,8 +52,7 @@ public class Cell {
 
     public void setDefinition(CellDefinition definition) {
         this.definition = definition;
-        this.neighborhood = this.definition.setUpNeighborhood(i, j, CellularAutomaton.width,
-                CellularAutomaton.height);
+        this.neighborhood = this.definition.setUpNeighborhood(i, j, CellularAutomaton.width, CellularAutomaton.height);
         this.definition.setUp(this.agent, this.neighborhood);
     }
 
