@@ -57,9 +57,8 @@ public class GameOfLife implements CellDefinition {
             if (((GameOfLife) neighborhood.get(i)).isAlive())
                 neighborsAlive++;
         }
-        System.out.println("(" + this.i + "," + this.j + ") -> alive neighbors = " + neighborsAlive);
 
-        if (neighborsAlive >= 2) {
+        if (1 < neighborsAlive) {
             this.postAlive = true;
         } else {
             this.postAlive = false;

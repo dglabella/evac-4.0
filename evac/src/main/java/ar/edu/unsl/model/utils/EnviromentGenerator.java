@@ -8,30 +8,31 @@ import ar.edu.unsl.model.definitions.GameOfLife;
 
 public class EnviromentGenerator {
 
-    // public Enviroment generateEnviroment(int width, int height) {
-    // Random random = new Random(System.currentTimeMillis());
+    public Enviroment generateEnviroment1(int width, int height) {
+        Random random = new Random(System.currentTimeMillis());
 
-    // CellularAutomaton enviroment = new CellularAutomaton(width, height);
-
-    // for (int i = 0; i < height; i++) {
-    // for (int j = 0; j < height; j++) {
-    // enviroment.getCells()[i][j].setDefinition(new GameOfLife(random.nextDouble()
-    // < 0.3 ? true : false));
-    // }
-    // }
-
-    // return enviroment;
-    // }
-
-    public Enviroment generateEnviroment(int width, int height) {
         CellularAutomaton enviroment = new CellularAutomaton(width, height);
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < height; j++) {
+                enviroment.getCells()[i][j]
+                        .setDefinition(new GameOfLife(random.nextDouble() < 0.2 ? true : false));
+            }
+        }
+
+        return enviroment;
+    }
+
+    public Enviroment generateEnviroment2(int width, int height) {
+        CellularAutomaton enviroment = new CellularAutomaton(width, height);
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 enviroment.getCells()[i][j].setDefinition(new GameOfLife(false));
             }
         }
 
+        // chesslike automaton
         ((GameOfLife) enviroment.getCells()[0][2].getDefinition()).setAlive(true);
         ((GameOfLife) enviroment.getCells()[1][1].getDefinition()).setAlive(true);
         ((GameOfLife) enviroment.getCells()[1][2].getDefinition()).setAlive(true);

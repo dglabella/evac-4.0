@@ -13,20 +13,22 @@ public class CellularAutomaton implements Enviroment {
 
     private Cell[][] cells;
 
-    private List<CellDefinition> neighboorhoodHolder = new ArrayList<>();
+    private List<CellDefinition> neighboorhoodHolder;
 
     /**
-     * The cellular automaton will be instantiated with size width * height. Every
-     * cell will be instantiated with a Default definition.
+     * The cellular automaton will be instantiated with size width * height. Every cell will be
+     * instantiated with a Default definition.
      * 
-     * @param width  The width.
+     * @param width The width.
      * @param height The height.
      * 
      */
     public CellularAutomaton(int width, int height) {
         CellularAutomaton.width = width;
         CellularAutomaton.height = height;
-        this.cells = new Cell[width][height];
+        this.neighboorhoodHolder = new ArrayList<>();
+
+        this.cells = new Cell[height][width];
 
         for (int i = 0; i < height; i++)
             for (int j = 0; j < width; j++)
@@ -53,7 +55,8 @@ public class CellularAutomaton implements Enviroment {
     private void fillNeighborhoodHolder(List<int[]> neighborhoodCoords) {
         for (int i = 0; i < neighborhoodCoords.size(); i++) {
             this.neighboorhoodHolder
-                    .add(this.cells[neighborhoodCoords.get(i)[0]][neighborhoodCoords.get(i)[1]].getDefinition());
+                    .add(this.cells[neighborhoodCoords.get(i)[0]][neighborhoodCoords.get(i)[1]]
+                            .getDefinition());
         }
     }
 
@@ -65,30 +68,40 @@ public class CellularAutomaton implements Enviroment {
 
     @Override
     public void evolve() {
-        for (int i = 0; i < this.width; i++) {
-            for (int j = 0; j < this.height; j++) {
+        for (int i = 0; i < this.height; i++) {
+            for (int j = 0; j < this.width; j++) {
                 this.neighboorhoodHolder.clear();
                 this.fillNeighborhoodHolder(this.cells[i][j].getNeighborhood());
                 this.cells[i][j].getDefinition().applyRule(this.neighboorhoodHolder);
             }
         }
 
-        for (int i = 0; i < this.width; i++)
-            for (int j = 0; j < this.height; j++)
+        for (int i = 0; i < this.height; i++)
+            for (int j = 0; j < this.width; j++)
                 this.cells[i][j].getDefinition().update();
     }
 
     @Override
     public void generateView() {
-        System.out.println("--------------------------");
-        for (int i = 0; i < this.width; i++) {
+        System.out.println(
+                "--------------------------------------------------------------------------------------------------");
+        for (int i = 0; i < this.height; i++) {
             System.out.print("|");
-            for (int j = 0; j < this.height; j++) {
+            for (int j = 0; j < this.width; j++) {
                 System.out.print(this.cells[i][j].getDefinition().getCodification());
             }
             System.out.println("|");
         }
-        System.out.println("--------------------------");
+        System.out.println(
+                "--------------------------------------------------------------------------------------------------");
+        System.out.println();
+
+        // try {
+        // Thread.sleep(100);
+        // } catch (InterruptedException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
 
         // System.out.print("\033[H\033[2J");
         // System.out.flush();
