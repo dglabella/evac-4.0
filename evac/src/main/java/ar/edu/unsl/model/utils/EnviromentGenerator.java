@@ -15,8 +15,7 @@ public class EnviromentGenerator {
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < height; j++) {
-                enviroment.getCells()[i][j]
-                        .setDefinition(new GameOfLife(random.nextDouble() < 0.2 ? true : false));
+                enviroment.getCells()[i][j].setDefinition(new GameOfLife(random.nextDouble() < 0.2 ? true : false));
             }
         }
 
@@ -32,13 +31,20 @@ public class EnviromentGenerator {
             }
         }
 
-        // chesslike automaton
-        ((GameOfLife) enviroment.getCells()[0][2].getDefinition()).setAlive(true);
-        ((GameOfLife) enviroment.getCells()[1][1].getDefinition()).setAlive(true);
-        ((GameOfLife) enviroment.getCells()[1][2].getDefinition()).setAlive(true);
-        ((GameOfLife) enviroment.getCells()[1][3].getDefinition()).setAlive(true);
-        ((GameOfLife) enviroment.getCells()[2][2].getDefinition()).setAlive(true);
-        ((GameOfLife) enviroment.getCells()[3][2].getDefinition()).setAlive(true);
+        // // chesslike automaton
+        // ((GameOfLife) enviroment.getCells()[0][2].getDefinition()).setAlive(true);
+        // ((GameOfLife) enviroment.getCells()[1][1].getDefinition()).setAlive(true);
+        // ((GameOfLife) enviroment.getCells()[1][2].getDefinition()).setAlive(true);
+        // ((GameOfLife) enviroment.getCells()[1][3].getDefinition()).setAlive(true);
+        // ((GameOfLife) enviroment.getCells()[2][2].getDefinition()).setAlive(true);
+        // ((GameOfLife) enviroment.getCells()[3][2].getDefinition()).setAlive(true);
+
+        ((GameOfLife) enviroment.getCells()[8][8].getDefinition()).setAlive(true);
+        ((GameOfLife) enviroment.getCells()[8][9].getDefinition()).setAlive(true);
+        ((GameOfLife) enviroment.getCells()[8][10].getDefinition()).setAlive(true);
+        ((GameOfLife) enviroment.getCells()[9][7].getDefinition()).setAlive(true);
+        ((GameOfLife) enviroment.getCells()[9][8].getDefinition()).setAlive(true);
+        ((GameOfLife) enviroment.getCells()[9][9].getDefinition()).setAlive(true);
 
         return enviroment;
     }

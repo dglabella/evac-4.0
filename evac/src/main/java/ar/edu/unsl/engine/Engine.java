@@ -16,13 +16,17 @@ public class Engine {
         this.subSteps = subSteps;
     }
 
-    private void agentsUpdatePhase() {}
+    private void agentsUpdatePhase() {
+    }
 
-    private void responsePropagationPhase() {}
+    private void responsePropagationPhase() {
+    }
 
-    private void conflictResolutionPhase() {}
+    private void conflictResolutionPhase() {
+    }
 
-    private void intentionalPhase() {}
+    private void intentionalPhase() {
+    }
 
     private void environmentalPhase() {
         this.enviroment.generateView();
@@ -43,7 +47,7 @@ public class Engine {
         // while (this.enviroment.agentsRemaining() > 0) {
         // this.timeStep();
         // }
-        for (int n = 0; n < 3; n++) {
+        for (int n = 0; n < 500; n++) {
             this.timeStep();
         }
     }

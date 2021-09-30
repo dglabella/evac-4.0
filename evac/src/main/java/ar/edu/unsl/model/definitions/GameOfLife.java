@@ -58,10 +58,11 @@ public class GameOfLife implements CellDefinition {
                 neighborsAlive++;
         }
 
-        if (1 < neighborsAlive) {
-            this.postAlive = true;
+        if (this.alive) {
+            this.postAlive = (neighborsAlive == 2 || neighborsAlive == 3) ? true : false;
+
         } else {
-            this.postAlive = false;
+            this.postAlive = neighborsAlive == 3 ? true : false;
         }
     }
 

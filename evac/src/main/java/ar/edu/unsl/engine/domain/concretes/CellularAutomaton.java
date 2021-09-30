@@ -16,10 +16,10 @@ public class CellularAutomaton implements Enviroment {
     private List<CellDefinition> neighboorhoodHolder;
 
     /**
-     * The cellular automaton will be instantiated with size width * height. Every cell will be
-     * instantiated with a Default definition.
+     * The cellular automaton will be instantiated with size width * height. Every
+     * cell will be instantiated with a Default definition.
      * 
-     * @param width The width.
+     * @param width  The width.
      * @param height The height.
      * 
      */
@@ -55,8 +55,7 @@ public class CellularAutomaton implements Enviroment {
     private void fillNeighborhoodHolder(List<int[]> neighborhoodCoords) {
         for (int i = 0; i < neighborhoodCoords.size(); i++) {
             this.neighboorhoodHolder
-                    .add(this.cells[neighborhoodCoords.get(i)[0]][neighborhoodCoords.get(i)[1]]
-                            .getDefinition());
+                    .add(this.cells[neighborhoodCoords.get(i)[0]][neighborhoodCoords.get(i)[1]].getDefinition());
         }
     }
 
@@ -83,8 +82,7 @@ public class CellularAutomaton implements Enviroment {
 
     @Override
     public void generateView() {
-        System.out.println(
-                "--------------------------------------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------");
         for (int i = 0; i < this.height; i++) {
             System.out.print("|");
             for (int j = 0; j < this.width; j++) {
@@ -92,18 +90,17 @@ public class CellularAutomaton implements Enviroment {
             }
             System.out.println("|");
         }
-        System.out.println(
-                "--------------------------------------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------");
         System.out.println();
 
-        // try {
-        // Thread.sleep(100);
-        // } catch (InterruptedException e) {
-        // // TODO Auto-generated catch block
-        // e.printStackTrace();
-        // }
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         // System.out.print("\033[H\033[2J");
-        // System.out.flush();
+        System.out.flush();
     }
 }
