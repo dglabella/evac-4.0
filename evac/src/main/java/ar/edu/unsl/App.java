@@ -5,8 +5,8 @@ import ar.edu.unsl.model.utils.EnviromentGenerator;
 
 public final class App {
 
-    private final static int WIDTH = 16;
-    private final static int HEIGHT = 16;
+    private final static int WIDTH = 32;
+    private final static int HEIGHT = 32;
     private final static int SUBSTEPS = 1;
 
     private App() {
@@ -31,7 +31,8 @@ public final class App {
         // e.printStackTrace();
         // }
 
-        Engine engine = new Engine(new EnviromentGenerator().generateEnviroment1(App.WIDTH, App.HEIGHT), App.SUBSTEPS);
+        Engine engine = new Engine(
+                new EnviromentGenerator().generateEnviroment2(App.WIDTH, App.HEIGHT), App.SUBSTEPS);
         engine.execute();
         engine.generateReport();
 
