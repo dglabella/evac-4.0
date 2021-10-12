@@ -31,7 +31,7 @@ public final class App {
         // e.printStackTrace();
         // }
 
-        Engine engine = new Engine(new EnviromentGenerator().generateEnviroment1(App.WIDTH, App.HEIGHT), App.SUBSTEPS);
+        Engine engine = new Engine(new EnviromentGenerator().generateEnviroment3(App.WIDTH, App.HEIGHT), App.SUBSTEPS);
         engine.execute();
         engine.generateReport();
 
