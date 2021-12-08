@@ -16,13 +16,17 @@ public class Engine {
         this.subSteps = subSteps;
     }
 
-    private void agentsUpdatePhase() {}
+    private void agentsUpdatePhase() {
+    }
 
-    private void responsePropagationPhase() {}
+    private void responsePropagationPhase() {
+    }
 
-    private void conflictResolutionPhase() {}
+    private void conflictResolutionPhase() {
+    }
 
-    private void intentionalPhase() {}
+    private void intentionalPhase() {
+    }
 
     private void environmentalPhase() {
         this.enviroment.generateView();
