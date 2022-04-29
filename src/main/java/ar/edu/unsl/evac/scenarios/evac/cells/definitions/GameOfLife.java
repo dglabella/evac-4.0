@@ -1,4 +1,4 @@
-package ar.edu.unsl.evac.scenarios.evac.definitions;
+package ar.edu.unsl.evac.scenarios.evac.cells.definitions;
 
 import java.util.List;
 import ar.edu.unsl.evac.engine.domain.Agent;

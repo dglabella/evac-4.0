@@ -1,27 +1,25 @@
-package ar.edu.unsl.evac.scenarios.evac.definitions;
+package ar.edu.unsl.evac.scenarios.evac.cells.definitions;
 
 import java.util.List;
-import ar.edu.unsl.engine.domain.abstracts.Agent;
-import ar.edu.unsl.engine.domain.abstracts.CellDefinition;
+import ar.edu.unsl.evac.engine.domain.Agent;
+import ar.edu.unsl.evac.engine.domain.CellDefinition;
 
-public class Wall implements CellDefinition {
-
-    private float resistance;
+public class Exit implements CellDefinition {
 
     @Override
-    public void setUp(Agent agent) {
+    public void setAgent(Agent agent) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void setUp(Agent agent, List<int[]> neighborhood) {
+    public void setUp(int i, int j, Agent agent, List<int[]> neighborhood) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public List<int[]> setUpNeighborhood(int i, int j, int width, int height) {
+    public List<int[]> setUpNeighborhood(int width, int height) {
         // TODO Auto-generated method stub
         return null;
     }

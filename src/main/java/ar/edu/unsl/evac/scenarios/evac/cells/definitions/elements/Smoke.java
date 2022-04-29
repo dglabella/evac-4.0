@@ -1,4 +1,4 @@
-package ar.edu.unsl.evac.scenarios.evac.definitions.elements;
+package ar.edu.unsl.evac.scenarios.evac.cells.definitions.elements;
 
 public class Smoke {
 

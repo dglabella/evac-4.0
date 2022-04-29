@@ -4,7 +4,7 @@ import java.util.Random;
 import ar.edu.unsl.evac.engine.domain.Cell;
 import ar.edu.unsl.evac.engine.domain.CellularAutomaton;
 import ar.edu.unsl.evac.engine.domain.Environment;
-import ar.edu.unsl.evac.scenarios.evac.definitions.GameOfLife;
+import ar.edu.unsl.evac.scenarios.evac.cells.definitions.GameOfLife;
 
 public class EnvironmentGenerator {
 

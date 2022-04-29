@@ -1,15 +1,14 @@
 package ar.edu.unsl.evac.scenarios.evac.agents;
 
-import ar.edu.unsl.engine.domain.abstracts.Agent;
-import ar.edu.unsl.engine.domain.abstracts.Environment;
-import ar.edu.unsl.engine.domain.concretes.Observation;
+import ar.edu.unsl.evac.engine.domain.Agent;
+import ar.edu.unsl.evac.engine.domain.Environment;
+import ar.edu.unsl.evac.engine.domain.Observation;
 
 public class Person extends Agent {
 
     @Override
-    protected Observation perceive(Environment enviroment) {
+    public Observation perceive(Environment enviroment) {
         // TODO Auto-generated method stub
         return null;
     }
-
 }
