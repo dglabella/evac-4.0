@@ -5,17 +5,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ar.edu.unsl.evac.Application;
 import ar.edu.unsl.evac.model.Project;
-import ar.edu.unsl.evac.services.ProjectServices;
+import ar.edu.unsl.evac.services.ProjectService;
 
 @RestController
+@RequestMapping(value = Application.EndPoint.projects)
 public class ProjectController {
 
     @Autowired
-    private ProjectServices projectServices;
+    private ProjectService projectServices;
 
-    @RequestMapping(value = "users/{username}/projects")
-    public List<Project> getAllProyects(@PathVariable String username) {
+    @RequestMapping
+    public List<Project> getAllProjects() {
+        return this.projectServices.getAll();
+    }
+
+    @RequestMapping(value = "/{username}")
+    public List<Project> getAllProjectsFromUser(@PathVariable String username) {
         return this.projectServices.getAllFromUser(username);
     }
 

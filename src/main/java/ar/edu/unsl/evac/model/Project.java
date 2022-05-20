@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "projects")
 public class Project {
+
     @Id
     private String _id;
     @Field
@@ -18,7 +19,7 @@ public class Project {
     @Field
     private String scenarioId;
     @Field
-    private List<ProjectState> savedStates;
+    private List<String> savedStates;
 
     // private User owner;
     // private Scenario scenario;
@@ -49,11 +50,11 @@ public class Project {
         this.description = description;
     }
 
-    public List<ProjectState> getSavedStates() {
+    public List<String> getSavedStates() {
         return this.savedStates;
     }
 
-    public void setSavedStates(List<ProjectState> savedStates) {
+    public void setSavedStates(List<String> savedStates) {
         this.savedStates = savedStates;
     }
 

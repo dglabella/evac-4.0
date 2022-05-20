@@ -1,0 +1,23 @@
+{
+	"_id": { "$oid": "6273d5a7bb697024220eb353" },
+	"name": "Game of Life",
+	"description": {
+		"general": "This is the Conway Game of Life",
+		"imgs": ["uri, uri"]
+	},
+	"authors": ["Jhon Conway"],
+	"agents": [],
+	"environmentals": [
+		{
+			"name": "alive cell",
+			"description": "represents an alive cell",
+			"uriImg": "uri"
+		},
+		{
+			"name": "dead cell",
+			"description": "represents a dead cell",
+			"uriImg": "uri"
+		}
+	],
+	"layers": []
+}

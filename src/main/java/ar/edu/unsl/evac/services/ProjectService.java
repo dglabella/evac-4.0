@@ -9,7 +9,7 @@ import ar.edu.unsl.evac.repositories.ProjectRepository;
 import ar.edu.unsl.evac.repositories.UserRepository;
 
 @Service
-public class ProjectServices {
+public class ProjectService {
 
     @Autowired
     private ProjectRepository projectRepository;
@@ -19,6 +19,10 @@ public class ProjectServices {
     public List<Project> getAllFromUser(String username) {
         User user = this.userRepository.findByUsername(username);
         return this.projectRepository.findAllFromUser(user.getId());
+    }
+
+    public List<Project> getAll() {
+        return this.projectRepository.findAll();
     }
 
     // public List<Project> getAll() {

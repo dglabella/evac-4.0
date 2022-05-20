@@ -1,0 +1,8 @@
+{
+	"_id": { "$oid": "6286d457c2f163617547ac18" },
+	"name": "game of life example",
+	"description": "just a cool game of life experimentation",
+	"savedStates": [],
+	"ownerId": { "$oid": "6266e2f05398700c80096f79" },
+	"scenarioId": { "$oid": "6285bae9dca76aa6924bd695" }
+}

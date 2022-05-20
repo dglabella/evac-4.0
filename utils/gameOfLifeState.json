@@ -1,0 +1,131 @@
+{
+	"_id": { "$oid": "62859e39e8f3d410734a90f1" },
+	"annotation": "initial state from a cinema evacuation",
+	"currentGeneration": { "$numberInt": "0" },
+	"environment": {
+		"width": { "$numberInt": "10" },
+		"height": { "$numberInt": "10" },
+		"cells": [
+			[
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false }
+			],
+			[
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true }
+			],
+			[
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false }
+			],
+			[
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true }
+			],
+			[
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false }
+			],
+			[
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true }
+			],
+			[
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false }
+			],
+			[
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true }
+			],
+			[
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false }
+			],
+			[
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true },
+				{ "isAlive": false },
+				{ "isAlive": true }
+			]
+		]
+	}
+}

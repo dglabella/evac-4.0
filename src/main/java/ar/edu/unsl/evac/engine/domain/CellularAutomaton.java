@@ -1,14 +1,14 @@
 package ar.edu.unsl.evac.engine.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 import ar.edu.unsl.evac.engine.domain.CellDefinition;
 import ar.edu.unsl.evac.engine.domain.definitions.LambdaDefinition;
 
 public class CellularAutomaton implements Environment {
 
-    protected int width;
-    protected int height;
+    private int width;
+    private int height;
 
     private Cell[][] cells;
 
@@ -50,8 +50,16 @@ public class CellularAutomaton implements Environment {
         return this.width;
     }
 
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
     public int getHeight() {
         return this.height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     private void fillNeighborhoodHolder(List<int[]> neighborhoodCoords) {

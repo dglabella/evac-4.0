@@ -1,0 +1,3 @@
+mongosh "mongodb+srv://cluster0.cgfkp.mongodb.net/evac" --apiVersion 1 --username dglabella
+
+mongodb+srv://dglabella:<pass>@cluster0.cgfkp.mongodb.net/evac
