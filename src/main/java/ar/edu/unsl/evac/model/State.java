@@ -19,6 +19,14 @@ public class State {
 
     public State() {}
 
+    public String getId() {
+        return this._id;
+    }
+
+    public void setId(String id) {
+        this._id = id;
+    }
+
     public String getAnnotation() {
         return this.annotation;
     }

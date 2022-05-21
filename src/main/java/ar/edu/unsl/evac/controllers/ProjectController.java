@@ -26,10 +26,10 @@ public class ProjectController {
         return this.projectServices.getAllFromUser(username);
     }
 
-    // @RequestMapping(value = "users/{username}/projects/{id}")
-    // public User getProject(@PathVariable String username, @PathVariable String id) {
-
-    // }
+    @RequestMapping(value = "/{id}")
+    public Project getProject(@PathVariable String id) {
+        return this.projectServices.getOne(id);
+    }
 
     // @PostMapping(consumes = {"application/json"})
     // public User userRegister(@RequestBody User user) {

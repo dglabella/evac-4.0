@@ -16,6 +16,8 @@ public class Cell {
 
     private int pathUsabilityFrequencyCounter;
 
+    public Cell() {}
+
     public Cell(int i, int j, CellDefinition definition) {
         this.i = i;
         this.j = j;

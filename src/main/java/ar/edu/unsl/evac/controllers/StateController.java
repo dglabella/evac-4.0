@@ -15,8 +15,8 @@ public class StateController {
     @Autowired
     private StateService stateService;
 
-    @RequestMapping(value = "/{stateId}")
-    public State getAllStatesFromProject(@PathVariable String stateId) {
-        return this.stateService.getState(stateId);
+    @RequestMapping(value = "/{id}")
+    public State getAllStatesFromProject(@PathVariable String id) {
+        return this.stateService.getOne(id);
     }
 }

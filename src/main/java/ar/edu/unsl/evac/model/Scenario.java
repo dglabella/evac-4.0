@@ -4,8 +4,6 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import ar.edu.unsl.evac.engine.domain.Agent;
-import ar.edu.unsl.evac.engine.domain.CellDefinition;
 
 @Document(collection = "scenarios")
 public class Scenario {
@@ -15,11 +13,11 @@ public class Scenario {
     @Field
     private String name;
     @Field
-    private String description;
+    private ScenarioDescriptor description;
     @Field
-    private List<Agent> agents;
+    private List<Element> agents;
     @Field
-    private List<CellDefinition> environmentals;
+    private List<Element> environmentals;
 
     public Scenario() {}
 
@@ -39,27 +37,27 @@ public class Scenario {
         this.name = name;
     }
 
-    public String getDescription() {
+    public ScenarioDescriptor getDescription() {
         return this.description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(ScenarioDescriptor description) {
         this.description = description;
     }
 
-    public List<Agent> getAgents() {
+    public List<Element> getAgents() {
         return this.agents;
     }
 
-    public void setAgents(List<Agent> agents) {
+    public void setAgents(List<Element> agents) {
         this.agents = agents;
     }
 
-    public List<CellDefinition> getEnvironmentals() {
+    public List<Element> getEnvironmentals() {
         return this.environmentals;
     }
 
-    public void setEnvironmentals(List<CellDefinition> environmentals) {
+    public void setEnvironmentals(List<Element> environmentals) {
         this.environmentals = environmentals;
     }
 }
