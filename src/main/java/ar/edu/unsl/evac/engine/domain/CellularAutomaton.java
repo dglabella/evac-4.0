@@ -2,7 +2,6 @@ package ar.edu.unsl.evac.engine.domain;
 
 import java.util.List;
 import java.util.ArrayList;
-import ar.edu.unsl.evac.engine.domain.CellDefinition;
 import ar.edu.unsl.evac.engine.domain.definitions.LambdaDefinition;
 
 public class CellularAutomaton implements Environment {
@@ -28,7 +27,7 @@ public class CellularAutomaton implements Environment {
     public CellularAutomaton(int width, int height) {
         this.width = width;
         this.height = height;
-        // this.neighboorhoodHolder = new ArrayList<CellDefinition>();
+        this.neighboorhoodHolder = new ArrayList<CellDefinition>();
 
         this.cells = new Cell[height][width];
 

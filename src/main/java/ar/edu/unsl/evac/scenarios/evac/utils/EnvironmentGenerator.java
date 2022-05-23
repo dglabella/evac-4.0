@@ -17,7 +17,7 @@ public class EnvironmentGenerator {
             for (int j = 0; j < height; j++) {
                 cell = environment.getCells()[i][j];
                 cell.setDefinition(new GameOfLife(false));
-                cell.getDefinition().setUpNeighborhood(width, height);
+                cell.setNeighborhood(cell.getDefinition().setUpNeighborhood(width, height));
             }
         }
 
@@ -31,7 +31,7 @@ public class EnvironmentGenerator {
             for (int j = 0; j < width; j++) {
                 cell = environment.getCells()[i][j];
                 cell.setDefinition(new GameOfLife(false));
-                cell.getDefinition().setUpNeighborhood(width, height);
+                cell.setNeighborhood(cell.getDefinition().setUpNeighborhood(width, height));
             }
         }
 
@@ -52,8 +52,6 @@ public class EnvironmentGenerator {
         ((GameOfLife) environment.getCells()[11][22].getDefinition()).setAlive(true);
         ((GameOfLife) environment.getCells()[11][23].getDefinition()).setAlive(true);
 
-
-
         return environment;
     }
 
@@ -64,7 +62,7 @@ public class EnvironmentGenerator {
             for (int j = 0; j < width; j++) {
                 cell = environment.getCells()[i][j];
                 cell.setDefinition(new GameOfLife(false));
-                cell.getDefinition().setUpNeighborhood(width, height);
+                cell.setNeighborhood(cell.getDefinition().setUpNeighborhood(width, height));
             }
         }
 

@@ -48,6 +48,7 @@ public class Cell {
 
     public void setNeighborhood(List<int[]> neighborhood) {
         this.neighborhood = neighborhood;
+        this.definition.setUp(this.i, this.j, this.agent, this.neighborhood);
     }
 
     public CellDefinition getDefinition() {

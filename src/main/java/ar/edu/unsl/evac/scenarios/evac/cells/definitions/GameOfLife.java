@@ -13,6 +13,8 @@ public class GameOfLife implements CellDefinition {
     private int i;
     private int j;
 
+    private List<int[]> neighborhood;
+
     public GameOfLife(boolean isAlive) {
         this.alive = isAlive;
     }
@@ -35,6 +37,7 @@ public class GameOfLife implements CellDefinition {
     public void setUp(int i, int j, Agent agent, List<int[]> neighborhood) {
         this.i = i;
         this.j = j;
+        this.neighborhood = neighborhood;
     }
 
     @Override
