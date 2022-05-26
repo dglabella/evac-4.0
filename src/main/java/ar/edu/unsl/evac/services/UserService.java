@@ -21,7 +21,7 @@ public class UserService {
     }
 
     public User insert(User user) {
-        return this.userRepository.save(user);
+        return this.userRepository.insert(user);
     }
 
     public User update(User user) {

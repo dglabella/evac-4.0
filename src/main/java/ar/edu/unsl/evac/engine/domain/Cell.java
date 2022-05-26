@@ -22,7 +22,7 @@ public class Cell {
         this.i = i;
         this.j = j;
         this.definition = definition;
-        this.definition.setUp(i, j, this.agent, this.neighborhood);
+        this.definition.setUp(i, j, this.agent, null);
     }
 
     // =========================== getters and setters ===========================
@@ -57,6 +57,7 @@ public class Cell {
 
     public void setDefinition(CellDefinition definition) {
         this.definition = definition;
+        this.definition.setUp(i, j, agent, neighborhood);
     }
 
     public int getPathUsabilityFrequencyCounter() {

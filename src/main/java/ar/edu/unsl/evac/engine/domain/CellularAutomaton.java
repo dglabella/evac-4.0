@@ -1,6 +1,7 @@
 package ar.edu.unsl.evac.engine.domain;
 
 import java.util.List;
+import java.util.Scanner;
 import java.util.ArrayList;
 import ar.edu.unsl.evac.engine.domain.definitions.LambdaDefinition;
 
@@ -106,6 +107,8 @@ public class CellularAutomaton implements Environment {
 
         try {
             Thread.sleep(100);
+            // Scanner scanner = new Scanner(System.in);
+            // scanner.nextLine();
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
