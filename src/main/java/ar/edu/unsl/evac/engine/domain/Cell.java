@@ -1,5 +1,7 @@
 package ar.edu.unsl.evac.engine.domain;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import ar.edu.unsl.evac.engine.domain.Agent;
 import ar.edu.unsl.evac.engine.domain.CellDefinition;
@@ -47,6 +49,10 @@ public class Cell {
     }
 
     public void setNeighborhood(List<int[]> neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
+    public void setUpNeighborhood(List<int[]> neighborhood) {
         this.neighborhood = neighborhood;
         this.definition.setUp(this.i, this.j, this.agent, this.neighborhood);
     }

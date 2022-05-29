@@ -1,7 +1,6 @@
 package ar.edu.unsl.evac.engine.domain;
 
 import java.util.List;
-import java.util.Scanner;
 import java.util.ArrayList;
 import ar.edu.unsl.evac.engine.domain.definitions.LambdaDefinition;
 

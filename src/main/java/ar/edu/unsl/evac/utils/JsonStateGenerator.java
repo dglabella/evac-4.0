@@ -1,3 +1,12 @@
+package ar.edu.unsl.evac.utils;
+
+import java.io.File;
+import java.io.IOException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import ar.edu.unsl.evac.engine.domain.CellularAutomaton;
+import ar.edu.unsl.evac.model.State;
+import ar.edu.unsl.evac.scenarios.evac.utils.EnvironmentGenerator;
+
 public class JsonStateGenerator {
 
     public void generate() {

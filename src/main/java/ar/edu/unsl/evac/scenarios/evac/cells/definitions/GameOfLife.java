@@ -7,6 +7,16 @@ import ar.edu.unsl.evac.engine.utils.Neighborhood;
 
 public class GameOfLife implements CellDefinition {
 
+    // private String _class;
+
+    // public String get_class() {
+    // return this._class;
+    // }
+
+    // public void set_class(String _class) {
+    // this._class = _class;
+    // }
+
     private boolean alive = false;
     private boolean postAlive = false;
 
@@ -14,6 +24,11 @@ public class GameOfLife implements CellDefinition {
     private int j;
 
     private List<int[]> neighborhood;
+
+    public GameOfLife() {
+        // this._class = this.getClass().getName();
+    }
+
 
     public GameOfLife(boolean isAlive) {
         this.alive = isAlive;
