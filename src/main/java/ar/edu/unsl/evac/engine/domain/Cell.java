@@ -1,10 +1,8 @@
 package ar.edu.unsl.evac.engine.domain;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import ar.edu.unsl.evac.engine.domain.Agent;
-import ar.edu.unsl.evac.engine.domain.CellDefinition;
+import org.springframework.data.annotation.Transient;
+import java.awt.Point;
 
 public class Cell {
 
@@ -12,11 +10,14 @@ public class Cell {
     private int j;
 
     private Agent agent;
-    private List<int[]> neighborhood;
+    private List<Point> neighborhoodCoords;
 
     private CellDefinition definition;
 
     private int pathUsabilityFrequencyCounter;
+
+    @Transient
+    private List<Cell> neighborhoodCells;
 
     public Cell() {}
 
@@ -24,7 +25,6 @@ public class Cell {
         this.i = i;
         this.j = j;
         this.definition = definition;
-        this.definition.setUp(i, j, this.agent, null);
     }
 
     // =========================== getters and setters ===========================
@@ -44,17 +44,12 @@ public class Cell {
         this.agent = agent;
     }
 
-    public List<int[]> getNeighborhood() {
-        return this.neighborhood;
+    public List<Point> getNeighborhoodCoords() {
+        return this.neighborhoodCoords;
     }
 
-    public void setNeighborhood(List<int[]> neighborhood) {
-        this.neighborhood = neighborhood;
-    }
-
-    public void setUpNeighborhood(List<int[]> neighborhood) {
-        this.neighborhood = neighborhood;
-        this.definition.setUp(this.i, this.j, this.agent, this.neighborhood);
+    public void setNeighborhood(List<Point> neighborhoodCoords) {
+        this.neighborhoodCoords = neighborhoodCoords;
     }
 
     public CellDefinition getDefinition() {
@@ -63,7 +58,6 @@ public class Cell {
 
     public void setDefinition(CellDefinition definition) {
         this.definition = definition;
-        this.definition.setUp(i, j, agent, neighborhood);
     }
 
     public int getPathUsabilityFrequencyCounter() {

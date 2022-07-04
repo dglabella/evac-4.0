@@ -3,6 +3,7 @@ package ar.edu.unsl.evac;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ar.edu.unsl.evac.engine.Engine;
+import ar.edu.unsl.evac.scenarios.evac.utils.EnvironmentGenerator;
 import ar.edu.unsl.evac.utils.JsonStateGenerator;
 
 @SpringBootApplication

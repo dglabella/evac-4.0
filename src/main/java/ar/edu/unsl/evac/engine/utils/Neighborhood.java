@@ -2,6 +2,7 @@ package ar.edu.unsl.evac.engine.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Point;
 
 public interface Neighborhood {
     /***
@@ -19,10 +20,10 @@ public interface Neighborhood {
      *         neighbors.
      * @throws Exception If sizeFactor constraints are violated.
      */
-    static List<int[]> Moore(int i, int j, int sizeFactor, int width, int height, boolean isModular)
+    static List<Point> Moore(int i, int j, int sizeFactor, int width, int height, boolean isModular)
             throws Exception {
 
-        List<int[]> ret = new ArrayList<>();
+        List<Point> ret = new ArrayList<>();
 
         int topLimit = i - sizeFactor;
         int leftLimit = j - sizeFactor;
@@ -48,16 +49,16 @@ public interface Neighborhood {
         } else {
             for (int a = topLimit; a < i; a++)
                 for (int b = leftLimit; b <= rightLimit; b++)
-                    ret.add(new int[] {a, b});
+                    ret.add(new Point(a, b));
 
             for (int b = leftLimit; b <= rightLimit; b++) {
                 if (b != j)
-                    ret.add(new int[] {i, b});
+                    ret.add(new Point(i, b));
             }
 
             for (int a = i + 1; a <= bottomLimit; a++)
                 for (int b = leftLimit; b <= rightLimit; b++)
-                    ret.add(new int[] {a, b});
+                    ret.add(new Point(a, b));
 
         }
 

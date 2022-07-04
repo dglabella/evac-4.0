@@ -1,34 +1,19 @@
 package ar.edu.unsl.evac.scenarios.evac.cells.definitions;
 
 import java.util.List;
-import ar.edu.unsl.evac.engine.domain.Agent;
+import ar.edu.unsl.evac.engine.domain.Cell;
 import ar.edu.unsl.evac.engine.domain.CellDefinition;
 import ar.edu.unsl.evac.engine.utils.Neighborhood;
+import java.awt.Point;
 
 public class GameOfLife implements CellDefinition {
-
-    // private String _class;
-
-    // public String get_class() {
-    // return this._class;
-    // }
-
-    // public void set_class(String _class) {
-    // this._class = _class;
-    // }
 
     private boolean alive = false;
     private boolean postAlive = false;
 
-    private int i;
-    private int j;
-
-    private List<int[]> neighborhood;
-
     public GameOfLife() {
-        // this._class = this.getClass().getName();
-    }
 
+    }
 
     public GameOfLife(boolean isAlive) {
         this.alive = isAlive;
@@ -43,20 +28,16 @@ public class GameOfLife implements CellDefinition {
         this.alive = alive;
     }
 
-    @Override
-    public void setAgent(Agent agent) {
-        // TODO Auto-generated method stub
+    public boolean isPostAlive() {
+        return this.postAlive;
+    }
+
+    public void setPostAlive(boolean postAlive) {
+        this.postAlive = postAlive;
     }
 
     @Override
-    public void setUp(int i, int j, Agent agent, List<int[]> neighborhood) {
-        this.i = i;
-        this.j = j;
-        this.neighborhood = neighborhood;
-    }
-
-    @Override
-    public List<int[]> setUpNeighborhood(int width, int height) {
+    public List<Point> setUpNeighborhood(int i, int j, int width, int height) {
         try {
             return Neighborhood.Moore(i, j, 1, width, height, false);
         } catch (Exception e) {
@@ -66,10 +47,11 @@ public class GameOfLife implements CellDefinition {
     }
 
     @Override
-    public void applyRule(List<CellDefinition> neighborhood) {
+    public void applyRule(Cell cell, List<Cell> neighborhood) {
         int neighborsAlive = 0;
+
         for (int i = 0; i < neighborhood.size(); i++) {
-            if (((GameOfLife) neighborhood.get(i)).isAlive())
+            if (((GameOfLife) neighborhood.get(i).getDefinition()).isAlive())
                 neighborsAlive++;
         }
 

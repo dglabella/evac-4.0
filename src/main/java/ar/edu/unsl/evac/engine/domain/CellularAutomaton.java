@@ -3,6 +3,7 @@ package ar.edu.unsl.evac.engine.domain;
 import java.util.List;
 import java.util.ArrayList;
 import ar.edu.unsl.evac.engine.domain.definitions.LambdaDefinition;
+import java.awt.Point;
 
 public class CellularAutomaton implements Environment {
 
@@ -10,11 +11,6 @@ public class CellularAutomaton implements Environment {
     private int height;
 
     private Cell[][] cells;
-
-    /**
-     * This list is used to hold a neighboorhood definitions
-     */
-    private List<CellDefinition> neighboorhoodHolder;
 
     /**
      * The cellular automaton will be instantiated with size width * height. Every cell will be
@@ -27,7 +23,6 @@ public class CellularAutomaton implements Environment {
     public CellularAutomaton(int width, int height) {
         this.width = width;
         this.height = height;
-        this.neighboorhoodHolder = new ArrayList<CellDefinition>();
 
         this.cells = new Cell[height][width];
 
@@ -61,12 +56,12 @@ public class CellularAutomaton implements Environment {
         this.height = height;
     }
 
-    private void fillNeighborhoodHolder(List<int[]> neighborhoodCoords) {
+    private List<Cell> obtainNeighborhoodCells(List<Point> neighborhoodCoords) {
+        List<Cell> ret = new ArrayList<>();
         for (int i = 0; i < neighborhoodCoords.size(); i++) {
-            this.neighboorhoodHolder
-                    .add(this.cells[neighborhoodCoords.get(i)[0]][neighborhoodCoords.get(i)[1]]
-                            .getDefinition());
+            ret.add(this.cells[neighborhoodCoords.get(i).x][neighborhoodCoords.get(i).y]);
         }
+        return ret;
     }
 
     public int agentsRemaining() {
@@ -78,9 +73,8 @@ public class CellularAutomaton implements Environment {
     public void evolve() {
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
-                this.neighboorhoodHolder.clear();
-                this.fillNeighborhoodHolder(this.cells[i][j].getNeighborhood());
-                this.cells[i][j].getDefinition().applyRule(this.neighboorhoodHolder);
+                this.cells[i][j].getDefinition().applyRule(this.cells[i][j],
+                        this.obtainNeighborhoodCells(this.cells[i][j].getNeighborhoodCoords()));
             }
         }
 
