@@ -2,7 +2,8 @@ package ar.edu.unsl.evac.engine.domain;
 
 import java.util.List;
 import org.springframework.data.annotation.Transient;
-import java.awt.Point;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import ar.edu.unsl.evac.engine.utils.Loc;
 
 public class Cell {
 
@@ -10,14 +11,19 @@ public class Cell {
     private int j;
 
     private Agent agent;
-    private List<Point> neighborhoodCoords;
-
-    private CellDefinition definition;
-
-    private int pathUsabilityFrequencyCounter;
 
     @Transient
     private List<Cell> neighborhoodCells;
+    private List<Loc> neighborhoodCoords;
+    @Transient
+    private List<PropertiesBundle> neighborhoodCellsPropertiesBundles;
+
+    private CellDefinition definition;
+
+    @Transient
+    private CellDefinition postDefinition;
+
+    private int pathUsabilityFrequencyCounter;
 
     public Cell() {}
 
@@ -44,12 +50,32 @@ public class Cell {
         this.agent = agent;
     }
 
-    public List<Point> getNeighborhoodCoords() {
+    @JsonIgnore
+    public List<Cell> getNeighborhoodCells() {
+        return this.neighborhoodCells;
+    }
+
+    @JsonIgnore
+    public void setNeighborhoodCells(List<Cell> neighborhoodCells) {
+        this.neighborhoodCells = neighborhoodCells;
+    }
+
+    public List<Loc> getNeighborhoodCoords() {
         return this.neighborhoodCoords;
     }
 
-    public void setNeighborhood(List<Point> neighborhoodCoords) {
+    public void setNeighborhoodCoords(List<Loc> neighborhoodCoords) {
         this.neighborhoodCoords = neighborhoodCoords;
+    }
+
+    @JsonIgnore
+    public List<PropertiesBundle> getNeighborhoodCellsPropertiesBundles() {
+        return this.neighborhoodCellsPropertiesBundles;
+    }
+
+    @JsonIgnore
+    public void setNeighborhoodCellsPropertiesBundles(List<PropertiesBundle> propertiesBundles) {
+        this.neighborhoodCellsPropertiesBundles = propertiesBundles;
     }
 
     public CellDefinition getDefinition() {
@@ -60,8 +86,22 @@ public class Cell {
         this.definition = definition;
     }
 
+    @JsonIgnore
+    public CellDefinition getPostDefinition() {
+        return this.postDefinition;
+    }
+
+    @JsonIgnore
+    public void setPostDefinition(CellDefinition definition) {
+        this.postDefinition = definition;
+    }
+
     public int getPathUsabilityFrequencyCounter() {
         return this.pathUsabilityFrequencyCounter;
+    }
+
+    public void setPathUsabilityFrequencyCounter(int value) {
+        this.pathUsabilityFrequencyCounter = value;
     }
 
     public void incrementPathUsabilityFrequencyCounter() {

@@ -1,8 +1,5 @@
 package ar.edu.unsl.evac.engine.domain;
 
-import ar.edu.unsl.evac.engine.domain.Cell;
-import ar.edu.unsl.evac.engine.domain.Observation;
-
 public abstract class Agent {
 
     private BehaviorEngine behaviorEngine;

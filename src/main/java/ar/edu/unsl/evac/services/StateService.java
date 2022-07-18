@@ -4,9 +4,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ar.edu.unsl.evac.engine.domain.CellularAutomaton;
+import ar.edu.unsl.evac.engine.utils.EnvironmentGenerator;
 import ar.edu.unsl.evac.model.State;
 import ar.edu.unsl.evac.repositories.StateRepository;
-import ar.edu.unsl.evac.scenarios.evac.utils.EnvironmentGenerator;
 
 @Service
 public class StateService {
@@ -32,7 +32,6 @@ public class StateService {
         s.setCurrentGeneration(80);
         s.setEnvironment(
                 (CellularAutomaton) new EnvironmentGenerator().generateEnvironment2(32, 32));
-
         this.stateRepository.insert(s);
         return s;
     }

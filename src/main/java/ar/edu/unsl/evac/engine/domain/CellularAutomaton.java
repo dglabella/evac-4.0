@@ -1,9 +1,9 @@
 package ar.edu.unsl.evac.engine.domain;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import ar.edu.unsl.evac.engine.domain.definitions.LambdaDefinition;
-import java.awt.Point;
+import ar.edu.unsl.evac.engine.utils.Loc;
 
 public class CellularAutomaton implements Environment {
 
@@ -26,9 +26,11 @@ public class CellularAutomaton implements Environment {
 
         this.cells = new Cell[height][width];
 
-        for (int i = 0; i < height; i++)
-            for (int j = 0; j < width; j++)
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 this.cells[i][j] = new Cell(i, j, new LambdaDefinition());
+            }
+        }
     }
 
     // =========================== getters and setters ===========================
@@ -56,31 +58,60 @@ public class CellularAutomaton implements Environment {
         this.height = height;
     }
 
-    private List<Cell> obtainNeighborhoodCells(List<Point> neighborhoodCoords) {
-        List<Cell> ret = new ArrayList<>();
-        for (int i = 0; i < neighborhoodCoords.size(); i++) {
-            ret.add(this.cells[neighborhoodCoords.get(i).x][neighborhoodCoords.get(i).y]);
-        }
-        return ret;
-    }
-
     public int agentsRemaining() {
         // TODO Auto-generated method stub
         return 0;
     }
 
+    public List<Cell> obtainNeighborhoodCells(List<Loc> neighborhoodCoords) {
+        List<Cell> ret = new ArrayList<>();
+
+        for (Loc loc : neighborhoodCoords) {
+            ret.add(this.cells[loc.getI()][loc.getJ()]);
+        }
+
+        return ret;
+    }
+
+    public List<PropertiesBundle> obtainNeighborhoodCellsPropertiesBundles(int i, int j) {
+        List<PropertiesBundle> ret = new ArrayList<>();
+
+        for (Cell cell : this.cells[i][j].getNeighborhoodCells()) {
+            ret.add(cell.getDefinition().getPropertiesBundle());
+        }
+
+        return ret;
+    }
+
     @Override
     public void evolve() {
+        Cell cell;
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
-                this.cells[i][j].getDefinition().applyRule(this.cells[i][j],
-                        this.obtainNeighborhoodCells(this.cells[i][j].getNeighborhoodCoords()));
+                cell = this.cells[i][j];
+                cell.setPostDefinition(cell.getDefinition().applyRule(i, j, cell.getAgent(),
+                        cell.getNeighborhoodCellsPropertiesBundles()));
             }
         }
 
-        for (int i = 0; i < this.height; i++)
-            for (int j = 0; j < this.width; j++)
-                this.cells[i][j].getDefinition().update();
+        for (int i = 0; i < this.height; i++) {
+            for (int j = 0; j < this.width; j++) {
+                cell = this.cells[i][j];
+                if (cell.getPostDefinition() != null) {
+                    cell.setDefinition(cell.getPostDefinition()); // transmute here
+                    cell.setPostDefinition(null);
+                    // recalculate neighborhood. Maybe this recalculation can be ommited if the new
+                    // definition has the same neighboorhood type (e.g both definition has Moore
+                    // neighborhood)
+                    cell.setNeighborhoodCoords(
+                            cell.getDefinition().setUpNeighborhood(i, j, this.width, this.height));
+                    cell.setNeighborhoodCells(
+                            this.obtainNeighborhoodCells(cell.getNeighborhoodCoords()));
+                } else {
+                    cell.getDefinition().update(); // otherwise, update definition state
+                }
+            }
+        }
     }
 
     @Override
