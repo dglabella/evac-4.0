@@ -5,13 +5,13 @@ import java.io.IOException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ar.edu.unsl.evac.engine.domain.CellularAutomaton;
 import ar.edu.unsl.evac.engine.utils.EnvironmentGenerator;
-import ar.edu.unsl.evac.model.State;
+import ar.edu.unsl.evac.model.SavedState;
 
 public class JsonStateGenerator {
 
     public void generate() {
         ObjectMapper mapper = new ObjectMapper();
-        State state = new State();
+        SavedState state = new SavedState();
         state.setId("62859e39e8f3d410734a90f1");
         state.setAnnotation("initial state from a game of life experiment");
         state.setCurrentGeneration(65);

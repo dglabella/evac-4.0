@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ar.edu.unsl.evac.engine.domain.CellularAutomaton;
 import ar.edu.unsl.evac.engine.utils.EnvironmentGenerator;
-import ar.edu.unsl.evac.model.State;
+import ar.edu.unsl.evac.model.SavedState;
 import ar.edu.unsl.evac.repositories.StateRepository;
 
 @Service
@@ -14,19 +14,19 @@ public class StateService {
     @Autowired
     private StateRepository stateRepository;
 
-    public State getOne(String stateId) {
-        Optional<State> optional = Optional.empty();
+    public SavedState getOne(String stateId) {
+        Optional<SavedState> optional = Optional.empty();
         optional = this.stateRepository.findById(stateId);
-        return optional.orElse(new State());
+        return optional.orElse(new SavedState());
     }
 
     // public List<State> getAll() {
     // return null;
     // }
 
-    public State insert(State state) {
+    public SavedState insert(SavedState state) {
         // return this.stateRepository.insert(state);
-        State s = new State();
+        SavedState s = new SavedState();
         s.setId("628f5326b1ab917d52d82913");
         s.setAnnotation("initial state from a game of life experiment");
         s.setCurrentGeneration(80);
@@ -36,11 +36,11 @@ public class StateService {
         return s;
     }
 
-    public State update(State state) {
+    public SavedState update(SavedState state) {
         return this.stateRepository.save(state);
     }
 
-    public void delete(State state) {
+    public void delete(SavedState state) {
         this.stateRepository.delete(state);
     }
 }

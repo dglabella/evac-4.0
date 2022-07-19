@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ar.edu.unsl.evac.Application;
-import ar.edu.unsl.evac.model.State;
+import ar.edu.unsl.evac.model.SavedState;
 import ar.edu.unsl.evac.services.StateService;
 
 @RestController
@@ -18,12 +18,12 @@ public class StateController {
     private StateService stateService;
 
     @RequestMapping(value = "/{id}")
-    public State getAllStatesFromProject(@PathVariable String id) {
+    public SavedState getAllStatesFromProject(@PathVariable String id) {
         return this.stateService.getOne(id);
     }
 
     @PostMapping(consumes = {"application/json"})
-    public String stateRegister(@RequestBody State state) {
+    public String stateRegister(@RequestBody SavedState state) {
         String s = this.stateService.insert(state).getId();
         return s;
     }

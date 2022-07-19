@@ -6,5 +6,7 @@ public interface Environment {
 
     void evolve();
 
+    String generateState();
+
     void generateView();
 }

@@ -35,5 +35,4 @@ public class ScenarioService {
     public void delete(Scenario scenario) {
         this.scenarioRepository.delete(scenario);
     }
-
 }

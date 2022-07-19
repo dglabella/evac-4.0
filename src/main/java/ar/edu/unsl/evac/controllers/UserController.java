@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping(consumes = {"application/json"})
-    public User userRegister(@RequestBody User user) {
+    public User userRegistration(@RequestBody User user) {
         return this.userService.insert(user);
     }
 

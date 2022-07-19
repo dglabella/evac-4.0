@@ -3,7 +3,7 @@ package ar.edu.unsl.evac.engine;
 import ar.edu.unsl.evac.engine.domain.Environment;
 import ar.edu.unsl.evac.engine.domain.ReportManager;
 
-public class Engine {
+public class Engine implements Runnable {
 
     private ReportManager reportManager;
 
@@ -25,7 +25,7 @@ public class Engine {
     private void intentionalPhase() {}
 
     private void environmentalPhase() {
-        this.enviroment.generateView();
+        // this.enviroment.generateView();
         this.enviroment.evolve();
     }
 
@@ -36,19 +36,26 @@ public class Engine {
             this.conflictResolutionPhase();
             this.responsePropagationPhase();
             this.agentsUpdatePhase();
+
+            this.enviroment.generateState();
         }
     }
 
     public void execute() {
-        // while (this.enviroment.agentsRemaining() > 0) {
-        // this.timeStep();
-        // }
-        for (int n = 0; n < 135; n++) {
-            this.timeStep();
-        }
+
     }
 
     public void generateReport() {
         System.err.println("No implementation yet for reporting results");
+    }
+
+    @Override
+    public void run() {
+        // while (this.enviroment.agentsRemaining() > 0) {
+        // this.timeStep();
+        // }
+        for (int n = 0; n < 132; n++) {
+            this.timeStep();
+        }
     }
 }

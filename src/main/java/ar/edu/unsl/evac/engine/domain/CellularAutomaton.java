@@ -2,6 +2,8 @@ package ar.edu.unsl.evac.engine.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ar.edu.unsl.evac.engine.domain.definitions.LambdaDefinition;
 import ar.edu.unsl.evac.engine.utils.Loc;
 
@@ -112,6 +114,19 @@ public class CellularAutomaton implements Environment {
                 }
             }
         }
+    }
+
+    @Override
+    public String generateState() {
+        ObjectMapper mapper = new ObjectMapper();
+        String state;
+        try {
+            state = mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            state = null;
+            e.printStackTrace();
+        }
+        return state;
     }
 
     @Override

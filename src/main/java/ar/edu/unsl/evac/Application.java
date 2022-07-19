@@ -18,9 +18,9 @@ public class Application {
 	}
 
 	public static void main(String[] args) {
-		// Engine engine = new Engine(new EnvironmentGenerator().generateEnvironment2(32, 32), 1);
-		// engine.execute();
+		Engine engine = new Engine(new EnvironmentGenerator().generateEnvironment2(32, 32), 1);
+		engine.execute();
 		// new JsonStateGenerator().generate();
-		SpringApplication.run(Application.class, args);
+		// SpringApplication.run(Application.class, args);
 	}
 }
