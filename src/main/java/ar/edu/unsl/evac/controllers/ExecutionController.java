@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ar.edu.unsl.evac.Application;
 import ar.edu.unsl.evac.engine.Engine;
+import ar.edu.unsl.evac.engine.utils.CustomParser;
 import ar.edu.unsl.evac.model.Execution;
 import ar.edu.unsl.evac.model.SavedState;
 import ar.edu.unsl.evac.services.ExecutionService;
@@ -25,14 +26,11 @@ public class ExecutionController {
     }
 
     @PostMapping(consumes = {"application/json"})
-    public void run(@RequestBody SavedState state) {
-        Execution execution = null;
-        new Runnable() {
-            @Override
-            public void run() {
-                Engine engine = new Engine(state.getEnvironment(), 1);
-                engine.execute();
-            }
-        }.run();
+    public String run(@RequestBody SavedState state) {
+        // should return a object with information about the state
+        Thread engineExecution = new Thread(
+                new Engine(this.executionService, state.getEnvironment(), 1, null, null));
+        engineExecution.start();
+        return "execution request sended!";
     }
 }

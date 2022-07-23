@@ -12,6 +12,12 @@ public class Execution {
     private String _id;
 
     @Field
+    private int width;
+
+    @Field
+    private int height;
+
+    @Field
     private List<State> generations;
 
     public String getId() {
@@ -20,6 +26,22 @@ public class Execution {
 
     public void setId(String id) {
         this._id = id;
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public List<State> getGenerations() {

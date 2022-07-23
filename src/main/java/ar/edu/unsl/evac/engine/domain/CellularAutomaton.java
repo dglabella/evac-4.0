@@ -1,15 +1,22 @@
 package ar.edu.unsl.evac.engine.domain;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.data.annotation.Transient;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ar.edu.unsl.evac.engine.domain.definitions.LambdaDefinition;
 import ar.edu.unsl.evac.engine.utils.Loc;
 
 public class CellularAutomaton implements Environment {
 
+    @Transient
     private int width;
+    @Transient
     private int height;
 
     private Cell[][] cells;
@@ -44,18 +51,22 @@ public class CellularAutomaton implements Environment {
         this.cells = cells;
     }
 
+    @JsonIgnore
     public int getWidth() {
         return this.width;
     }
 
+    @JsonIgnore
     public void setWidth(int width) {
         this.width = width;
     }
 
+    @JsonIgnore
     public int getHeight() {
         return this.height;
     }
 
+    @JsonIgnore
     public void setHeight(int height) {
         this.height = height;
     }
@@ -117,12 +128,11 @@ public class CellularAutomaton implements Environment {
     }
 
     @Override
-    public String generateState() {
-        ObjectMapper mapper = new ObjectMapper();
+    public String generateState(StateParser parser) {
         String state;
         try {
-            state = mapper.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
+            state = parser.parseToJson(this);
+        } catch (Exception e) {
             state = null;
             e.printStackTrace();
         }

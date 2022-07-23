@@ -1,5 +1,7 @@
 package ar.edu.unsl.evac.engine.utils;
 
+import java.io.Serializable;
+
 public class Loc {
 
     private int i;

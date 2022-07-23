@@ -1,11 +1,12 @@
 package ar.edu.unsl.evac.engine.domain;
 
+import java.io.Serializable;
 import java.util.List;
 import org.springframework.data.annotation.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ar.edu.unsl.evac.engine.utils.Loc;
 
-public class Cell {
+public class Cell implements Serializable {
 
     private int i;
     private int j;

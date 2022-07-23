@@ -1,5 +1,6 @@
 package ar.edu.unsl.evac.scenarios.gol;
 
+import java.io.Serializable;
 import java.util.List;
 import ar.edu.unsl.evac.engine.domain.Agent;
 import ar.edu.unsl.evac.engine.domain.CellDefinition;

@@ -6,7 +6,7 @@ public interface Environment {
 
     void evolve();
 
-    String generateState();
+    String generateState(StateParser parser);
 
     void generateView();
 }

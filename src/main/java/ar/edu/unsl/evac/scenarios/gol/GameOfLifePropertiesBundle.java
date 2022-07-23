@@ -1,5 +1,6 @@
 package ar.edu.unsl.evac.scenarios.gol;
 
+import java.io.Serializable;
 import ar.edu.unsl.evac.engine.domain.PropertiesBundle;
 
 public class GameOfLifePropertiesBundle implements PropertiesBundle {
