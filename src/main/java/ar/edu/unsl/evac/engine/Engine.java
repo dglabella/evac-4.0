@@ -1,14 +1,10 @@
 package ar.edu.unsl.evac.engine;
 
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import ar.edu.unsl.evac.engine.domain.CellularAutomaton;
 import ar.edu.unsl.evac.engine.domain.Environment;
-import ar.edu.unsl.evac.engine.domain.StateParser;
 import ar.edu.unsl.evac.engine.domain.ReportManager;
-import ar.edu.unsl.evac.model.Execution;
-import ar.edu.unsl.evac.model.State;
+import ar.edu.unsl.evac.engine.utils.CellularAutomatonParser;
 import ar.edu.unsl.evac.services.ExecutionService;
 
 public class Engine implements Runnable {
@@ -20,11 +16,11 @@ public class Engine implements Runnable {
 
     private ReportManager reportManager;
 
-    private StateParser parser;
+    private CellularAutomatonParser parser;
     private List<String> runGenerations;
 
     public Engine(ExecutionService executionService, Environment enviroment, int subSteps,
-            ReportManager reportManager, StateParser parser) {
+            ReportManager reportManager, CellularAutomatonParser parser) {
         this.executionService = executionService;
 
         this.enviroment = enviroment;
@@ -78,13 +74,8 @@ public class Engine implements Runnable {
         // while (this.enviroment.agentsRemaining() > 0) {
         // this.timeStep();
         // }
-
-        System.out.println("Runnning Simulation...");
-
-        for (int n = 0; n < 132; n++) {
+        for (int n = 0; n < 131; n++) {
             this.timeStep();
         }
-
-        System.out.println("Ending simulation run.");
     }
 }

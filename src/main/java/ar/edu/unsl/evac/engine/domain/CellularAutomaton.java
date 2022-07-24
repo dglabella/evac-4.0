@@ -1,15 +1,11 @@
 package ar.edu.unsl.evac.engine.domain;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.annotation.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ar.edu.unsl.evac.engine.domain.definitions.LambdaDefinition;
+import ar.edu.unsl.evac.engine.utils.CellularAutomatonParser;
 import ar.edu.unsl.evac.engine.utils.Loc;
 
 public class CellularAutomaton implements Environment {
@@ -128,10 +124,10 @@ public class CellularAutomaton implements Environment {
     }
 
     @Override
-    public String generateState(StateParser parser) {
+    public String generateState(CellularAutomatonParser parser) {
         String state;
         try {
-            state = parser.parseToJson(this);
+            state = parser.parseStateToJson(this);
         } catch (Exception e) {
             state = null;
             e.printStackTrace();
