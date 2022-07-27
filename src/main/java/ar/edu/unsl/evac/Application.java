@@ -28,11 +28,10 @@ public class Application {
 	}
 
 	public static void main(String[] args) {
-
-		executeEngine();
-
+		// executeEngine();
 		// new JsonStateGenerator().generate();
-		// SpringApplication.run(Application.class, args);
+
+		SpringApplication.run(Application.class, args);
 	}
 
 	private static void executeEngine() {
@@ -40,17 +39,10 @@ public class Application {
 		int height = 32;
 		CellularAutomatonParser parser = new CellularAutomatonParser();
 
-		Engine engine = new Engine(null,
-				new EnvironmentGenerator().generateEnvironment2(width, height), 1, null, parser);
-
-		Thread thread = new Thread(engine);
+		Engine engine = new Engine(new EnvironmentGenerator().generateEnvironment2(width, height),
+				1, null, parser);
 		System.out.println("Runnning Simulation...");
-		thread.start();
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		engine.execute();
 		System.out.println("Ending simulation run.");
 
 		System.out.println("Parsing...");

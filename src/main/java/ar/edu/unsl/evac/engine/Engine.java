@@ -5,11 +5,8 @@ import java.util.List;
 import ar.edu.unsl.evac.engine.domain.Environment;
 import ar.edu.unsl.evac.engine.domain.ReportManager;
 import ar.edu.unsl.evac.engine.utils.CellularAutomatonParser;
-import ar.edu.unsl.evac.services.ExecutionService;
 
-public class Engine implements Runnable {
-
-    private ExecutionService executionService;
+public class Engine {
 
     private Environment enviroment;
     private int subSteps;
@@ -19,9 +16,8 @@ public class Engine implements Runnable {
     private CellularAutomatonParser parser;
     private List<String> runGenerations;
 
-    public Engine(ExecutionService executionService, Environment enviroment, int subSteps,
-            ReportManager reportManager, CellularAutomatonParser parser) {
-        this.executionService = executionService;
+    public Engine(Environment enviroment, int subSteps, ReportManager reportManager,
+            CellularAutomatonParser parser) {
 
         this.enviroment = enviroment;
         this.subSteps = subSteps;
@@ -69,13 +65,14 @@ public class Engine implements Runnable {
         System.err.println("No implementation yet for reporting results");
     }
 
-    @Override
-    public void run() {
+    public void execute() {
         // while (this.enviroment.agentsRemaining() > 0) {
         // this.timeStep();
         // }
         for (int n = 0; n < 131; n++) {
             this.timeStep();
         }
+
+
     }
 }
