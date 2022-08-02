@@ -36,30 +36,7 @@ public class ExecutionService {
     @Async
     public Execution insert(SavedState savedState) {
 
-        // Reading deflated data...
-        try {
-            ByteArrayInputStream inputStream =
-                    new ByteArrayInputStream(savedState.getEnvironmentData().getBytes());
-            DataInputStream reader = new DataInputStream(inputStream);
 
-            int nBytesToRead;
-            nBytesToRead = reader.available();
-            if (nBytesToRead > 0) {
-                byte[] bytes = new byte[nBytesToRead];
-                reader.read(bytes);
-                String deflatedData = new String(bytes);
-
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                InflaterOutputStream inflater = new InflaterOutputStream(outputStream);
-                inflater.write(bytes);
-
-                // System.out.println("========================== RESULT
-                // ==========================\n"
-                // + outputStream);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         // int width = 32;
         // int height = 32;

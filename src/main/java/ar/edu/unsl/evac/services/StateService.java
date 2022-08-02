@@ -30,8 +30,8 @@ public class StateService {
         s.setId("628f5326b1ab917d52d82913");
         s.setAnnotation("initial state from a game of life experiment");
         s.setCurrentGeneration(80);
-        s.setEnvironment(
-                (CellularAutomaton) new EnvironmentGenerator().generateEnvironment2(32, 32));
+        // s.setEnvironmentData(
+        // (CellularAutomaton) new EnvironmentGenerator().generateEnvironment2(32, 32));
         this.stateRepository.insert(s);
         return s;
     }

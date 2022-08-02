@@ -1,4 +1,4 @@
-package ar.edu.unsl.evac.engine.domain;
+package ar.edu.unsl.evac.engine.utils;
 
 public interface EnvironmentParser {
 

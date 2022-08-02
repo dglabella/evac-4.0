@@ -15,8 +15,8 @@ public class JsonStateGenerator {
         state.setId("62859e39e8f3d410734a90f1");
         state.setAnnotation("initial state from a game of life experiment");
         state.setCurrentGeneration(65);
-        state.setEnvironment(
-                (CellularAutomaton) new EnvironmentGenerator().generateEnvironment2(32, 32));
+        // state.setEnvironmentData(
+        // (CellularAutomaton) new EnvironmentGenerator().generateEnvironment2(32, 32));
         try {
             // Object to JSON in file
             mapper.writeValue(

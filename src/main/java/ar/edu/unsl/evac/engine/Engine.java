@@ -72,7 +72,5 @@ public class Engine {
         for (int n = 0; n < 131; n++) {
             this.timeStep();
         }
-
-
     }
 }

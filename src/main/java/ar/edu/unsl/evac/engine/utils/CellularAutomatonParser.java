@@ -2,7 +2,6 @@ package ar.edu.unsl.evac.engine.utils;
 
 import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ar.edu.unsl.evac.engine.domain.EnvironmentParser;
 
 public class CellularAutomatonParser implements EnvironmentParser {
 
@@ -22,9 +21,8 @@ public class CellularAutomatonParser implements EnvironmentParser {
         return this.mapper.readValue(json, valueType);
     }
 
-    public String generateExecutionJson(int width, int height, String propertyName,
-            List<String> generations) {
-        String jsonExecution = "\"" + propertyName + "\":[";
+    public String generateExecutionJson(int width, int height, List<String> generations) {
+        String jsonExecution = "[";
         try {
             for (int i = 0; i < generations.size() - 1; i++) {
                 jsonExecution += generations.get(i);
