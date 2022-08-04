@@ -58,7 +58,7 @@ public class GameOfLifeDefinition implements CellDefinition {
     }
 
     @Override
-    public String getCodification() {
+    public String codification() {
         return this.propertiesBundle.isAlive() ? " # " : "   ";
     }
 

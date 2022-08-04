@@ -36,7 +36,7 @@ public class LambdaDefinition implements CellDefinition {
     }
 
     @Override
-    public String getCodification() {
+    public String codification() {
         // TODO Auto-generated method stub
         return null;
     }

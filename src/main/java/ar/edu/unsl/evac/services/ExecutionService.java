@@ -39,7 +39,7 @@ public class ExecutionService {
                     environmentParser.parseStateToObject(new String(uncompressData));
 
             System.out.println("Cell[10][16] is alive ?: "
-                    + ((GameOfLifePropertiesBundle) environment.getCells()[10][16].getDefinition()
+                    + ((GameOfLifePropertiesBundle) environment.getCells()[10][16].getDef()
                             .getPropertiesBundle()).isAlive());
         } catch (Exception e) {
             e.printStackTrace();

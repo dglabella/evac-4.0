@@ -14,8 +14,8 @@ public class Cell implements Serializable {
     private Agent agent;
 
     @Transient
-    private List<Cell> neighborhoodCells;
-    private List<Loc> neighborhoodCoords;
+    private List<Cell> neighborsCells;
+    private List<Loc> neighborsCoords;
     @Transient
     private List<PropertiesBundle> neighborhoodCellsPropertiesBundles;
 
@@ -24,7 +24,7 @@ public class Cell implements Serializable {
     @Transient
     private CellDefinition postDefinition;
 
-    private int pathUsabilityFrequencyCounter;
+    private int usabilityFrequencyCounter;
 
     public Cell() {}
 
@@ -52,21 +52,21 @@ public class Cell implements Serializable {
     }
 
     @JsonIgnore
-    public List<Cell> getNeighborhoodCells() {
-        return this.neighborhoodCells;
+    public List<Cell> getNeighborsCells() {
+        return this.neighborsCells;
     }
 
     @JsonIgnore
-    public void setNeighborhoodCells(List<Cell> neighborhoodCells) {
-        this.neighborhoodCells = neighborhoodCells;
+    public void setNeighborhoodCells(List<Cell> neighborsCells) {
+        this.neighborsCells = neighborsCells;
     }
 
-    public List<Loc> getNeighborhoodCoords() {
-        return this.neighborhoodCoords;
+    public List<Loc> getNeighbors() {
+        return this.neighborsCoords;
     }
 
-    public void setNeighborhoodCoords(List<Loc> neighborhoodCoords) {
-        this.neighborhoodCoords = neighborhoodCoords;
+    public void setNeighbors(List<Loc> neighbors) {
+        this.neighborsCoords = neighbors;
     }
 
     @JsonIgnore
@@ -79,11 +79,19 @@ public class Cell implements Serializable {
         this.neighborhoodCellsPropertiesBundles = propertiesBundles;
     }
 
-    public CellDefinition getDefinition() {
+    /**
+     * 
+     * @return The cell definition for this cell.
+     */
+    public CellDefinition getDef() {
         return this.definition;
     }
 
-    public void setDefinition(CellDefinition definition) {
+    /**
+     * 
+     * @param definition The cell definition for this cell.
+     */
+    public void setDef(CellDefinition definition) {
         this.definition = definition;
     }
 
@@ -97,15 +105,25 @@ public class Cell implements Serializable {
         this.postDefinition = definition;
     }
 
-    public int getPathUsabilityFrequencyCounter() {
-        return this.pathUsabilityFrequencyCounter;
+    /**
+     * @return The usability frequency counter number for this cell.
+     */
+    public int getUfc() {
+        return this.usabilityFrequencyCounter;
     }
 
-    public void setPathUsabilityFrequencyCounter(int value) {
-        this.pathUsabilityFrequencyCounter = value;
+    /**
+     * 
+     * @param value is the usability frequency counter for this cell.
+     */
+    public void setPufc(int value) {
+        this.usabilityFrequencyCounter = value;
     }
 
+    /**
+     * increment by 1 the usability frequency counter for this cell.
+     */
     public void incrementPathUsabilityFrequencyCounter() {
-        this.pathUsabilityFrequencyCounter++;
+        this.usabilityFrequencyCounter++;
     }
 }

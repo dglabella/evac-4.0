@@ -87,8 +87,8 @@ public class CellularAutomaton implements Environment {
     public List<PropertiesBundle> obtainNeighborhoodCellsPropertiesBundles(int i, int j) {
         List<PropertiesBundle> ret = new ArrayList<>();
 
-        for (Cell cell : this.cells[i][j].getNeighborhoodCells()) {
-            ret.add(cell.getDefinition().getPropertiesBundle());
+        for (Cell cell : this.cells[i][j].getNeighborsCells()) {
+            ret.add(cell.getDef().getPropertiesBundle());
         }
 
         return ret;
@@ -100,7 +100,7 @@ public class CellularAutomaton implements Environment {
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
                 cell = this.cells[i][j];
-                cell.setPostDefinition(cell.getDefinition().applyRule(i, j, cell.getAgent(),
+                cell.setPostDefinition(cell.getDef().applyRule(i, j, cell.getAgent(),
                         cell.getNeighborhoodCellsPropertiesBundles()));
             }
         }
@@ -109,17 +109,16 @@ public class CellularAutomaton implements Environment {
             for (int j = 0; j < this.width; j++) {
                 cell = this.cells[i][j];
                 if (cell.getPostDefinition() != null) {
-                    cell.setDefinition(cell.getPostDefinition()); // transmute here
+                    cell.setDef(cell.getPostDefinition()); // transmute here
                     cell.setPostDefinition(null);
                     // recalculate neighborhood. Maybe this recalculation can be ommited if the new
                     // definition has the same neighboorhood type (e.g both definition has Moore
                     // neighborhood)
-                    cell.setNeighborhoodCoords(
-                            cell.getDefinition().setUpNeighborhood(i, j, this.width, this.height));
-                    cell.setNeighborhoodCells(
-                            this.obtainNeighborhoodCells(cell.getNeighborhoodCoords()));
+                    cell.setNeighbors(
+                            cell.getDef().setUpNeighborhood(i, j, this.width, this.height));
+                    cell.setNeighborhoodCells(this.obtainNeighborhoodCells(cell.getNeighbors()));
                 } else {
-                    cell.getDefinition().update(); // otherwise, update definition state
+                    cell.getDef().update(); // otherwise, update definition state
                 }
             }
         }
@@ -144,7 +143,7 @@ public class CellularAutomaton implements Environment {
         for (int i = 0; i < this.height; i++) {
             System.out.print("|");
             for (int j = 0; j < this.width; j++) {
-                System.out.print(this.cells[i][j].getDefinition().getCodification());
+                System.out.print(this.cells[i][j].getDef().codification());
             }
             System.out.println("|");
         }

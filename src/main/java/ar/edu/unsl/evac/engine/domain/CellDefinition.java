@@ -1,7 +1,9 @@
 package ar.edu.unsl.evac.engine.domain;
 
 import java.util.List;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import ar.edu.unsl.evac.engine.utils.Loc;
+import ar.edu.unsl.evac.scenarios.gol.GameOfLifeDefinition;
 
 public interface CellDefinition {
 
@@ -46,7 +48,7 @@ public interface CellDefinition {
      * 
      * @return The codification for this cell state.
      */
-    String getCodification();
+    String codification();
 
     /**
      * This method is intended to return an integer whose value acts as a type identifier.
