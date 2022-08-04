@@ -17,6 +17,8 @@ public class CellularAutomaton implements Environment {
 
     private Cell[][] cells;
 
+    public CellularAutomaton() {}
+
     /**
      * The cellular automaton will be instantiated with size width * height. Every cell will be
      * instantiated with a Default definition.

@@ -1,21 +1,17 @@
 package ar.edu.unsl.evac.services;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.zip.InflaterOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import ar.edu.unsl.evac.engine.Engine;
+import ar.edu.unsl.evac.engine.domain.CellularAutomaton;
 import ar.edu.unsl.evac.engine.utils.CellularAutomatonParser;
-import ar.edu.unsl.evac.engine.utils.EnvironmentGenerator;
+import ar.edu.unsl.evac.engine.utils.EnvironmentCompressor;
+import ar.edu.unsl.evac.engine.utils.EnvironmentParser;
 import ar.edu.unsl.evac.model.Execution;
-import ar.edu.unsl.evac.model.SavedState;
 import ar.edu.unsl.evac.repositories.ExecutionRepository;
+import ar.edu.unsl.evac.scenarios.gol.GameOfLifePropertiesBundle;
 
 @Service
 public class ExecutionService {
@@ -34,34 +30,20 @@ public class ExecutionService {
     }
 
     @Async
-    public Execution insert(SavedState savedState) {
+    public void insert(byte[] savedStateByteArray) {
+        EnvironmentCompressor environmentCompressor = new EnvironmentCompressor();
+        EnvironmentParser<CellularAutomaton> environmentParser = new CellularAutomatonParser();
+        try {
+            byte[] uncompressData = environmentCompressor.uncompress(savedStateByteArray);
+            CellularAutomaton environment =
+                    environmentParser.parseStateToObject(new String(uncompressData));
 
-
-
-        // int width = 32;
-        // int height = 32;
-
-        // CellularAutomatonParser parser = new CellularAutomatonParser();
-
-        // Engine engine = new Engine(new EnvironmentGenerator().generateEnvironment2(width,
-        // height),
-        // 1, null, parser);
-        // System.out.println("Runnning Simulation...");
-        // engine.execute();
-        // System.out.println("Ending simulation run.");
-
-        // System.out.println("Parsing...");
-        // String jsonExecution = "{\"width\":" + width + ",\"height\":" + height + ",";
-        // jsonExecution += parser.generateExecutionJson(width, height, "generations",
-        // engine.getRunGenerations());
-
-        // jsonExecution += "}";
-
-
-        // Execution execution = new Execution();
-
-        // return this.executionRepository.save(execution);
-        return null;
+            System.out.println("Cell[10][16] is alive ?: "
+                    + ((GameOfLifePropertiesBundle) environment.getCells()[10][16].getDefinition()
+                            .getPropertiesBundle()).isAlive());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Execution update(Execution execution) {

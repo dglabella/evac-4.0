@@ -1,11 +1,11 @@
 package ar.edu.unsl.evac.engine.utils;
 
-import java.io.Serializable;
-
 public class Loc {
 
     private int i;
     private int j;
+
+    public Loc() {}
 
     public Loc(int i, int j) {
         this.i = i;

@@ -1,8 +1,8 @@
 package ar.edu.unsl.evac.engine.utils;
 
-public interface EnvironmentParser {
+public interface EnvironmentParser<T> {
 
-    String parseStateToJson(Object obj) throws Exception;
+    String parseStateToJson(T obj) throws Exception;
 
-    <T> Object parseStateToObject(String json, Class<T> valueType) throws Exception;
+    T parseStateToObject(String json) throws Exception;
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ar.edu.unsl.evac.Application;
+import ar.edu.unsl.evac.engine.utils.EnvironmentCompressor;
 import ar.edu.unsl.evac.model.Execution;
 import ar.edu.unsl.evac.model.SavedState;
 import ar.edu.unsl.evac.services.ExecutionService;
@@ -23,12 +24,13 @@ public class ExecutionController {
         return this.executionService.getOne(id);
     }
 
-    @PostMapping(consumes = {"application/json"})
-    public String run(@RequestBody SavedState state) {
+    // @PostMapping(consumes = {"application/json"})
+    @PostMapping
+    public String run(@RequestBody byte[] savedStateByteArray) {
         // should return a object with information about the state
         System.out.println("before insert");
 
-        this.executionService.insert(state);
+        this.executionService.insert(savedStateByteArray);
 
         System.out.println("after insert");
 

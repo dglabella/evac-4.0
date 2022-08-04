@@ -69,7 +69,7 @@ public class Engine {
         // while (this.enviroment.agentsRemaining() > 0) {
         // this.timeStep();
         // }
-        for (int n = 0; n < 131; n++) {
+        for (int n = 0; n < 1; n++) {
             this.timeStep();
         }
     }

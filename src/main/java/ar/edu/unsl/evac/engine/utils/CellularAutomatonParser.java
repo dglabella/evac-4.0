@@ -2,8 +2,9 @@ package ar.edu.unsl.evac.engine.utils;
 
 import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ar.edu.unsl.evac.engine.domain.CellularAutomaton;
 
-public class CellularAutomatonParser implements EnvironmentParser {
+public class CellularAutomatonParser implements EnvironmentParser<CellularAutomaton> {
 
     private ObjectMapper mapper;
 
@@ -12,13 +13,13 @@ public class CellularAutomatonParser implements EnvironmentParser {
     }
 
     @Override
-    public String parseStateToJson(Object obj) throws Exception {
+    public String parseStateToJson(CellularAutomaton obj) throws Exception {
         return this.mapper.writeValueAsString(obj);
     }
 
     @Override
-    public <T> Object parseStateToObject(String json, Class<T> valueType) throws Exception {
-        return this.mapper.readValue(json, valueType);
+    public CellularAutomaton parseStateToObject(String json) throws Exception {
+        return this.mapper.readValue(json, CellularAutomaton.class);
     }
 
     public String generateExecutionJson(int width, int height, List<String> generations) {

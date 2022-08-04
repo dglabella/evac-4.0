@@ -1,15 +1,10 @@
 package ar.edu.unsl.evac;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import org.springframework.boot.SpringApplication;
-
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ar.edu.unsl.evac.engine.Engine;
 import ar.edu.unsl.evac.engine.utils.CellularAutomatonParser;
@@ -29,10 +24,62 @@ public class Application {
 	}
 
 	public static void main(String[] args) {
-		executeEngine();
+		// executeEngine();
+		// generateState();
 		// new JsonStateGenerator().generate();
 
-		// SpringApplication.run(Application.class, args);
+		SpringApplication.run(Application.class, args);
+	}
+
+	private static void generateState() {
+		int width = 32;
+		int height = 32;
+		CellularAutomatonParser parser = new CellularAutomatonParser();
+
+		Engine engine = new Engine(new EnvironmentGenerator().generateEnvironment2(width, height),
+				1, null, parser);
+		System.out.println("Runnning Simulation...");
+		engine.execute();
+		System.out.println("Ending simulation run.");
+
+		System.out.println("Parsing...");
+		String jsonInitialState = engine.getRunGenerations().get(0);
+
+
+		// Save normal file...
+		try {
+			// Files.write(
+			// new File("C:\\Users\\dglab\\OneDrive\\Escritorio\\jacksonTest\\execution.json")
+			// .toPath(),
+			// jsonExecution.getBytes(StandardCharsets.UTF_8));
+			Files.write(new File(
+					"C:\\Users\\dglab\\OneDrive\\Escritorio\\jacksonTest\\initialState.json")
+							.toPath(),
+					jsonInitialState.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// Read bytes from the normal file, compress the data and save compressed data into new
+		// file...
+		EnvironmentCompressor environmentCompressor = new EnvironmentCompressor();
+		try {
+			byte[] data = Files.readAllBytes(new File(
+					"C:\\Users\\dglab\\OneDrive\\Escritorio\\jacksonTest\\initialState.json")
+							.toPath());
+
+			environmentCompressor = new EnvironmentCompressor();
+			byte[] compressedData = environmentCompressor.compress(data);
+
+			Files.write(new File(
+					"C:\\Users\\dglab\\OneDrive\\Escritorio\\jacksonTest\\initialStateCompressed.dat")
+							.toPath(),
+					compressedData);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private static void executeEngine() {
@@ -53,15 +100,9 @@ public class Application {
 
 		jsonExecution += "}";
 
-		// try {
-		// BufferedWriter writer = new BufferedWriter(new FileWriter(
-		// "C:\\Users\\dglab\\OneDrive\\Escritorio\\jacksonTest\\execution.json"));
-		// writer.write(jsonExecution);
-		// writer.close();
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
 
+		// ====================================================================================================================
+		// ====================================================================================================================
 		// Save normal file...
 		try {
 			// Files.write(
@@ -113,40 +154,6 @@ public class Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		// ====================================================================================================================
-		// ====================================================================================================================
-		// EnvironmentCompressor environmentCompressor = new EnvironmentCompressor();
-		// // Saving deflated file...
-		// try {
-		// String jsonExecutionCompressed =
-		// environmentCompressor.compress(jsonExecution);
-
-		// BufferedWriter writer = new BufferedWriter(new FileWriter(
-		// "C:\\Users\\dglab\\OneDrive\\Escritorio\\jacksonTest\\executionCompressed.dat"));
-		// writer.write(jsonExecutionCompressed);
-		// writer.close();
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-
-		// // Reading stored deflated file and then storing it again...
-		// try {
-		// Path path = FileSystems.getDefault().getPath(
-		// "C:\\Users\\dglab\\OneDrive\\Escritorio\\jacksonTest\\executionCompressed.dat");
-
-		// // String s = Files.readString(path, Charset.forName("Cp1252")); // Cp1252 is
-		// // for ANSI Encoding
-		// String uncompressedData = environmentCompressor.uncompress(new
-		// String(Files.readAllBytes(path)));
-
-		// BufferedWriter writer = new BufferedWriter(new FileWriter(
-		// "C:\\Users\\dglab\\OneDrive\\Escritorio\\jacksonTest\\executionUncompressed.json"));
-		// writer.write(uncompressedData);
-		// writer.close();
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
 		// ====================================================================================================================
 		// ====================================================================================================================
 	}
