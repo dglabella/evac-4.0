@@ -3,6 +3,7 @@ package ar.edu.unsl.evac.engine.utils;
 import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ar.edu.unsl.evac.engine.domain.CellularAutomaton;
+import ar.edu.unsl.evac.model.State;
 
 public class CellularAutomatonParser implements EnvironmentParser<CellularAutomaton> {
 
@@ -20,6 +21,14 @@ public class CellularAutomatonParser implements EnvironmentParser<CellularAutoma
     @Override
     public CellularAutomaton parseStateToObject(String json) throws Exception {
         return this.mapper.readValue(json, CellularAutomaton.class);
+    }
+
+    public String generateSavedState(byte[] compressedState) {
+        String savedState =
+                "{\"_id\":{\"$oid\":\"628f5326b1ab917d52d82913\"},\"annotation\":\"initial state from a game of life experiment\",\"currentGeneration\":65,\"environmentData\":\"";
+        savedState += new String(compressedState);
+        savedState += "\"}";
+        return savedState;
     }
 
     public String generateExecutionJson(int width, int height, List<String> generations) {

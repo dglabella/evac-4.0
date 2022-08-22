@@ -10,8 +10,9 @@ import ar.edu.unsl.evac.engine.utils.CellularAutomatonParser;
 import ar.edu.unsl.evac.engine.utils.EnvironmentCompressor;
 import ar.edu.unsl.evac.engine.utils.EnvironmentParser;
 import ar.edu.unsl.evac.model.Execution;
+import ar.edu.unsl.evac.model.SavedState;
 import ar.edu.unsl.evac.repositories.ExecutionRepository;
-import ar.edu.unsl.evac.scenarios.gol.GameOfLifePropertiesBundle;
+import ar.edu.unsl.evac.scenarios.gol.GameOfLifeCellState;
 
 @Service
 public class ExecutionService {
@@ -30,17 +31,18 @@ public class ExecutionService {
     }
 
     @Async
-    public void insert(byte[] savedStateByteArray) {
+    public void execute(SavedState savedState) {
         EnvironmentCompressor environmentCompressor = new EnvironmentCompressor();
         EnvironmentParser<CellularAutomaton> environmentParser = new CellularAutomatonParser();
         try {
-            byte[] uncompressData = environmentCompressor.uncompress(savedStateByteArray);
+            byte[] uncompressData = environmentCompressor
+                    .uncompress(savedState.getEnvironmentCompressedData().getBytes());
             CellularAutomaton environment =
                     environmentParser.parseStateToObject(new String(uncompressData));
 
             System.out.println("Cell[10][16] is alive ?: "
-                    + ((GameOfLifePropertiesBundle) environment.getCells()[10][16].getDef()
-                            .getPropertiesBundle()).isAlive());
+                    + ((GameOfLifeCellState) environment.getCells()[10][16].getDef().getState())
+                            .isAlive());
         } catch (Exception e) {
             e.printStackTrace();
         }

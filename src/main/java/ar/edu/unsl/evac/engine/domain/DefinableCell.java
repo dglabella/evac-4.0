@@ -5,14 +5,18 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import ar.edu.unsl.evac.engine.utils.Loc;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "type")
-public interface CellDefinition<T extends CellState> {
+public interface DefinableCell {
+
+    public CellState getState();
+
+    public void setState(CellState state);
 
     /**
      * Set up the state for this definition. Use this function to initialize the state of this cell.
-     * 
+     *
      * @return the state of this cell to be used as initial value.
      */
-    T stateSetUp();
+    CellState stateSetUp();
 
     /**
      * Generates a neighborhood for the cell of this cell definition. This cell has the (i,j)
@@ -38,16 +42,16 @@ public interface CellDefinition<T extends CellState> {
      *         definition of this cell (i.e transmute it) then return null; otherwise the cell
      *         definition to be used for the transmutation may be returned.
      */
-    CellDefinition<? extends CellState> applyRule(int i, int j, T actualState, T nextState,
-            Agent agent, List<? extends CellState> neighborStates);
+    DefinableCell applyRule(int i, int j, CellState nextState, Agent agent,
+            List<CellState> neighborStates);
 
-
+    void update(CellState nextState);
 
     /**
      * 
      * @return The codification for this cell state.
      */
-    String codification(T actualState);
+    String codification();
 
     /**
      * This method is intended to return an integer whose value acts as a type identifier.

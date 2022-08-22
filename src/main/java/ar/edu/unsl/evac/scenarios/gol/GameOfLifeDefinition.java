@@ -1,22 +1,34 @@
 package ar.edu.unsl.evac.scenarios.gol;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import ar.edu.unsl.evac.engine.domain.Agent;
-import ar.edu.unsl.evac.engine.domain.CellDefinition;
+import ar.edu.unsl.evac.engine.domain.DefinableCell;
 import ar.edu.unsl.evac.engine.domain.CellState;
-import ar.edu.unsl.evac.engine.domain.Visitor;
 import ar.edu.unsl.evac.engine.utils.Loc;
 import ar.edu.unsl.evac.engine.utils.Neighborhood;
 
-public class GameOfLifeDefinition
-        implements CellDefinition<GameOfLifeCellState>, GameOfLifeVisitable {
+public class GameOfLifeDefinition implements DefinableCell {
+
+    private GameOfLifeCellState cellState;
 
     public GameOfLifeDefinition() {}
 
+    public GameOfLifeDefinition(GameOfLifeCellState cellState) {
+        this.cellState = cellState;
+    }
+
     @Override
-    public GameOfLifeCellState stateSetUp() {
+    public CellState getState() {
+        return this.cellState;
+    }
+
+    @Override
+    public void setState(CellState cellState) {
+        this.cellState = (GameOfLifeCellState) cellState;
+    }
+
+    @Override
+    public CellState stateSetUp() {
         return new GameOfLifeCellState();
     }
 
@@ -31,41 +43,43 @@ public class GameOfLifeDefinition
     }
 
     @Override
-    public CellDefinition<? extends CellState> applyRule(int i, int j,
-            GameOfLifeCellState actualState, GameOfLifeCellState nextState, Agent agent,
-            List<? extends CellState> neighborStates) {
+    public DefinableCell applyRule(int i, int j, CellState nextState, Agent agent,
+            List<CellState> neighborStates) {
 
         int neighborsAlive = 0;
 
         for (CellState cellStates : neighborStates) {
-            if (cellStates.isAlive()) {
+            if (((GameOfLifeCellState) cellStates).isAlive()) {
                 neighborsAlive++;
             }
         }
 
-        if (actualState.isAlive())
-
-        {
-            nextState.setAlive((neighborsAlive == 2 || neighborsAlive == 3) ? true : false);
+        if (this.cellState.isAlive()) {
+            ((GameOfLifeCellState) nextState)
+                    .setAlive((neighborsAlive == 2 || neighborsAlive == 3) ? true : false);
         } else {
-            nextState.setAlive(neighborsAlive == 3 ? true : false);
+            ((GameOfLifeCellState) nextState).setAlive(neighborsAlive == 3 ? true : false);
         }
+
+        // GameOfLifeDefinition g = new GameOfLifeDefinition();
+        // GameOfLifeCellState cs = new GameOfLifeCellState();
+        // g.setCellState(cs);
 
         return null; // null means "do not transmute"
     }
 
     @Override
-    public String codification(GameOfLifeCellState actualState) {
-        return actualState.isAlive() ? " # " : "   ";
+    public void update(CellState nextState) {
+        this.cellState.setAlive(((GameOfLifeCellState) nextState).isAlive());
+    }
+
+    @Override
+    public String codification() {
+        return this.cellState.isAlive() ? " # " : "   ";
     }
 
     @Override
     public int typeId() {
         return 0;
-    }
-
-    @Override
-    public void accept(GameOfLifeVisitor visitor) {
-        visitor.visit(cellstate);
     }
 }

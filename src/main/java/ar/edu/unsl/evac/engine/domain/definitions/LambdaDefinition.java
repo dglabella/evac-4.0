@@ -2,18 +2,31 @@ package ar.edu.unsl.evac.engine.domain.definitions;
 
 import java.util.List;
 import ar.edu.unsl.evac.engine.domain.Agent;
-import ar.edu.unsl.evac.engine.domain.CellDefinition;
+import ar.edu.unsl.evac.engine.domain.DefinableCell;
 import ar.edu.unsl.evac.engine.domain.CellState;
 import ar.edu.unsl.evac.engine.utils.Loc;
 
 /**
  * This Cell definition represents emptyness.
  */
-public class LambdaDefinition implements CellDefinition<LambdaCellState> {
+public class LambdaDefinition implements DefinableCell {
 
     @Override
-    public LambdaCellState setUpState() {
-        return new LambdaCellState();
+    public CellState getState() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setState(CellState state) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public CellState stateSetUp() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
@@ -23,14 +36,20 @@ public class LambdaDefinition implements CellDefinition<LambdaCellState> {
     }
 
     @Override
-    public CellDefinition<? extends CellState> applyRule(int i, int j, LambdaCellState actualState,
-            List<CellState> neighborStates, LambdaCellState nextState, Agent agent) {
+    public DefinableCell applyRule(int i, int j, CellState nextState, Agent agent,
+            List<CellState> neighborStates) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public String codification(LambdaCellState actualState) {
+    public void update(CellState nextState) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public String codification() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -40,5 +59,4 @@ public class LambdaDefinition implements CellDefinition<LambdaCellState> {
         // TODO Auto-generated method stub
         return 0;
     }
-
 }

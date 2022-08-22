@@ -18,45 +18,24 @@ public class Cell {
     @Transient
     private List<CellState> neighborhoodStates;
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private CellState state;
-
-    public CellState getState() {
-        return this.state;
-    }
-
-    public void setState(CellState state) {
-        this.state = state;
-    }
-
     @Transient
     private CellState postState;
 
-    @JsonIgnore
-    public CellState getPostState() {
-        return this.postState;
-    }
-
-    @JsonIgnore
-    public void setPostState(CellState postState) {
-        this.postState = postState;
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private CellDefinition<CellState> definition;
+    private DefinableCell definition;
 
     @Transient
-    private CellDefinition<CellState> postDefinition;
+    private DefinableCell postDefinition;
 
     private int usabilityFrequencyCounter;
 
     public Cell() {}
 
-    public Cell(int i, int j, CellDefinition<CellState> definition) {
+    public Cell(int i, int j, DefinableCell definition) {
         this.i = i;
         this.j = j;
-        this.state = definition.stateSetUp();
         this.definition = definition;
+        this.postState = definition.stateSetUp(); // replicate for next state
+        this.definition.setState(definition.stateSetUp());// instantiate in the definition
     }
 
     // =========================== getters and setters ===========================
@@ -104,11 +83,21 @@ public class Cell {
         this.neighborhoodStates = neighborhoodStates;
     }
 
+    @JsonIgnore
+    public CellState getPostState() {
+        return this.postState;
+    }
+
+    @JsonIgnore
+    public void setPostState(CellState postState) {
+        this.postState = postState;
+    }
+
     /**
      * 
      * @return The cell definition for this cell.
      */
-    public CellDefinition<CellState> getDef() {
+    public DefinableCell getDef() {
         return this.definition;
     }
 
@@ -116,18 +105,20 @@ public class Cell {
      * 
      * @param definition The cell definition for this cell.
      */
-    public void setDef(CellDefinition<CellState> definition) {
+    public void setDef(DefinableCell definition) {
         this.definition = definition;
+        this.postState = definition.stateSetUp();
     }
 
     @JsonIgnore
-    public CellDefinition<CellState> getPostDefinition() {
+    public DefinableCell getPostDefinition() {
         return this.postDefinition;
     }
 
     @JsonIgnore
-    public void setPostDefinition(CellDefinition<CellState> definition) {
+    public void setPostDefinition(DefinableCell definition) {
         this.postDefinition = definition;
+        // this.postState = definition.stateSetUp();
     }
 
     /**

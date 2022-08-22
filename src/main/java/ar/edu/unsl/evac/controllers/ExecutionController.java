@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ar.edu.unsl.evac.Application;
 import ar.edu.unsl.evac.model.Execution;
+import ar.edu.unsl.evac.model.SavedState;
 import ar.edu.unsl.evac.services.ExecutionService;
 
 @RestController
@@ -24,11 +25,11 @@ public class ExecutionController {
 
     // @PostMapping(consumes = {"application/json"})
     @PostMapping
-    public String run(@RequestBody byte[] savedStateByteArray) {
+    public String run(@RequestBody SavedState savedState) {
         // should return a object with information about the state
         System.out.println("before insert");
 
-        this.executionService.insert(savedStateByteArray);
+        this.executionService.execute(savedState);
 
         System.out.println("after insert");
 

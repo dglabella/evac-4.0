@@ -36,11 +36,11 @@ public class Application {
 	}
 
 	private static void generateState() {
-		int width = 4;
-		int height = 4;
+		int width = 32;
+		int height = 32;
 		CellularAutomatonParser parser = new CellularAutomatonParser();
 
-		Engine engine = new Engine(new EnvironmentGenerator().generateEnvironment1(width, height),
+		Engine engine = new Engine(new EnvironmentGenerator().generateEnvironment2(width, height),
 				1, null, parser);
 		System.out.println("Runnning Simulation...");
 		engine.execute();

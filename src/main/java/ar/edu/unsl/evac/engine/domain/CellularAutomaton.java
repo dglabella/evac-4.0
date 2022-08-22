@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.annotation.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import ar.edu.unsl.evac.engine.domain.definitions.LambdaCellState;
 import ar.edu.unsl.evac.engine.domain.definitions.LambdaDefinition;
 import ar.edu.unsl.evac.engine.utils.CellularAutomatonParser;
 import ar.edu.unsl.evac.engine.utils.Loc;
-import ar.edu.unsl.evac.scenarios.gol.GameOfLifeCellState;
 
 public class CellularAutomaton implements Environment {
 
@@ -37,7 +35,7 @@ public class CellularAutomaton implements Environment {
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                this.cells[i][j] = new Cell(i, j, new LambdaDefinition<LambdaCellState>());
+                this.cells[i][j] = new Cell(i, j, new LambdaDefinition());
             }
         }
     }
@@ -86,7 +84,7 @@ public class CellularAutomaton implements Environment {
         return ret;
     }
 
-    public List<CellState> obtainNeighborhoodCellsPropertiesBundles(int i, int j) {
+    public List<CellState> obtainNeighborhoodCellStates(int i, int j) {
         List<CellState> ret = new ArrayList<>();
 
         for (Cell cell : this.cells[i][j].getNeighborsCells()) {
@@ -102,8 +100,8 @@ public class CellularAutomaton implements Environment {
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
                 cell = this.cells[i][j];
-                cell.setPostDefinition(cell.getDef().applyRule(i, j, cell.getAgent(),
-                        cell.getNeighborhoodStates()));
+                cell.setPostDefinition(cell.getDef().applyRule(i, j, cell.getPostState(),
+                        cell.getAgent(), cell.getNeighborhoodStates()));
             }
         }
 
@@ -120,7 +118,7 @@ public class CellularAutomaton implements Environment {
                             cell.getDef().setUpNeighborhood(i, j, this.width, this.height));
                     cell.setNeighborhoodCells(this.obtainNeighborhoodCells(cell.getNeighbors()));
                 } else {
-                    cell.getDef().update(); // otherwise, update definition state
+                    cell.getDef().update(cell.getPostState()); // otherwise, update definition state
                 }
             }
         }
@@ -142,13 +140,14 @@ public class CellularAutomaton implements Environment {
     public void generateView() {
         System.out.println(
                 "-----------------------------------------------------------------------------------");
-        for (int i = 0; i < this.height; i++) {
+        for (Cell[] row : this.cells) {
             System.out.print("|");
-            for (int j = 0; j < this.width; j++) {
-                System.out.print(this.cells[i][j].getDef().codification());
+            for (Cell c : row) {
+                System.out.print(c.getDef().codification());
             }
             System.out.println("|");
         }
+
         System.out.println(
                 "------------------------------------------------------------------------------------");
         System.out.println();
