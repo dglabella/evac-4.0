@@ -1,17 +1,18 @@
 package ar.edu.unsl.evac.engine.domain;
 
 import java.util.List;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import ar.edu.unsl.evac.engine.utils.Loc;
-import ar.edu.unsl.evac.scenarios.gol.GameOfLifeDefinition;
 
-public interface CellDefinition {
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "type")
+public interface CellDefinition<T extends CellState> {
 
     /**
+     * Set up the state for this definition. Use this function to initialize the state of this cell.
      * 
-     * @return The properties bundle associated to this cell definition.
+     * @return the state of this cell to be used as initial value.
      */
-    PropertiesBundle getPropertiesBundle();
+    T stateSetUp();
 
     /**
      * Generates a neighborhood for the cell of this cell definition. This cell has the (i,j)
@@ -31,24 +32,22 @@ public interface CellDefinition {
      * @param i The component i of the pair ( i , j ) being ( i , j ) the position of this cell.
      * @param j The component j of the pair ( i , j ) being ( i , j ) the position of this cell.
      * @param agent The agent that is currently in this cell.
-     * @param neighbors The neighbors properties of this cell.
+     * @param neighbors The neighbors states of this cell.
      * @return A cell definition. This cell definition will be used to transmute the current
      *         definition of this cell. In other words, if it is not necessary to change the
      *         definition of this cell (i.e transmute it) then return null; otherwise the cell
      *         definition to be used for the transmutation may be returned.
      */
-    CellDefinition applyRule(int i, int j, Agent agent, List<PropertiesBundle> neighbors);
+    CellDefinition<? extends CellState> applyRule(int i, int j, T actualState, T nextState,
+            Agent agent, List<? extends CellState> neighborStates);
 
-    /**
-     * This method is used to update properties within properties bundle in this cell.
-     */
-    void update();
+
 
     /**
      * 
      * @return The codification for this cell state.
      */
-    String codification();
+    String codification(T actualState);
 
     /**
      * This method is intended to return an integer whose value acts as a type identifier.

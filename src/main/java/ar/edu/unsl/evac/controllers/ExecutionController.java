@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ar.edu.unsl.evac.Application;
-import ar.edu.unsl.evac.engine.utils.EnvironmentCompressor;
 import ar.edu.unsl.evac.model.Execution;
-import ar.edu.unsl.evac.model.SavedState;
 import ar.edu.unsl.evac.services.ExecutionService;
 
 @RestController

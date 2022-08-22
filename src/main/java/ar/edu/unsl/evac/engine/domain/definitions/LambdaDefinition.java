@@ -3,18 +3,17 @@ package ar.edu.unsl.evac.engine.domain.definitions;
 import java.util.List;
 import ar.edu.unsl.evac.engine.domain.Agent;
 import ar.edu.unsl.evac.engine.domain.CellDefinition;
-import ar.edu.unsl.evac.engine.domain.PropertiesBundle;
+import ar.edu.unsl.evac.engine.domain.CellState;
 import ar.edu.unsl.evac.engine.utils.Loc;
 
 /**
  * This Cell definition represents emptyness.
  */
-public class LambdaDefinition implements CellDefinition {
+public class LambdaDefinition implements CellDefinition<LambdaCellState> {
 
     @Override
-    public PropertiesBundle getPropertiesBundle() {
-        // TODO Auto-generated method stub
-        return null;
+    public LambdaCellState setUpState() {
+        return new LambdaCellState();
     }
 
     @Override
@@ -24,19 +23,14 @@ public class LambdaDefinition implements CellDefinition {
     }
 
     @Override
-    public CellDefinition applyRule(int i, int j, Agent agent, List<PropertiesBundle> neighbors) {
+    public CellDefinition<? extends CellState> applyRule(int i, int j, LambdaCellState actualState,
+            List<CellState> neighborStates, LambdaCellState nextState, Agent agent) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void update() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public String codification() {
+    public String codification(LambdaCellState actualState) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -46,4 +40,5 @@ public class LambdaDefinition implements CellDefinition {
         // TODO Auto-generated method stub
         return 0;
     }
+
 }

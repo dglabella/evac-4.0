@@ -1,12 +1,11 @@
 package ar.edu.unsl.evac.engine.domain;
 
-import java.io.Serializable;
 import java.util.List;
 import org.springframework.data.annotation.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ar.edu.unsl.evac.engine.utils.Loc;
 
-public class Cell implements Serializable {
+public class Cell {
 
     private int i;
     private int j;
@@ -17,20 +16,46 @@ public class Cell implements Serializable {
     private List<Cell> neighborsCells;
     private List<Loc> neighborsCoords;
     @Transient
-    private List<PropertiesBundle> neighborhoodCellsPropertiesBundles;
+    private List<CellState> neighborhoodStates;
 
-    private CellDefinition definition;
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private CellState state;
+
+    public CellState getState() {
+        return this.state;
+    }
+
+    public void setState(CellState state) {
+        this.state = state;
+    }
 
     @Transient
-    private CellDefinition postDefinition;
+    private CellState postState;
+
+    @JsonIgnore
+    public CellState getPostState() {
+        return this.postState;
+    }
+
+    @JsonIgnore
+    public void setPostState(CellState postState) {
+        this.postState = postState;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private CellDefinition<CellState> definition;
+
+    @Transient
+    private CellDefinition<CellState> postDefinition;
 
     private int usabilityFrequencyCounter;
 
     public Cell() {}
 
-    public Cell(int i, int j, CellDefinition definition) {
+    public Cell(int i, int j, CellDefinition<CellState> definition) {
         this.i = i;
         this.j = j;
+        this.state = definition.stateSetUp();
         this.definition = definition;
     }
 
@@ -70,20 +95,20 @@ public class Cell implements Serializable {
     }
 
     @JsonIgnore
-    public List<PropertiesBundle> getNeighborhoodCellsPropertiesBundles() {
-        return this.neighborhoodCellsPropertiesBundles;
+    public List<CellState> getNeighborhoodStates() {
+        return this.neighborhoodStates;
     }
 
     @JsonIgnore
-    public void setNeighborhoodCellsPropertiesBundles(List<PropertiesBundle> propertiesBundles) {
-        this.neighborhoodCellsPropertiesBundles = propertiesBundles;
+    public void setNeighborhoodStates(List<CellState> neighborhoodStates) {
+        this.neighborhoodStates = neighborhoodStates;
     }
 
     /**
      * 
      * @return The cell definition for this cell.
      */
-    public CellDefinition getDef() {
+    public CellDefinition<CellState> getDef() {
         return this.definition;
     }
 
@@ -91,17 +116,17 @@ public class Cell implements Serializable {
      * 
      * @param definition The cell definition for this cell.
      */
-    public void setDef(CellDefinition definition) {
+    public void setDef(CellDefinition<CellState> definition) {
         this.definition = definition;
     }
 
     @JsonIgnore
-    public CellDefinition getPostDefinition() {
+    public CellDefinition<CellState> getPostDefinition() {
         return this.postDefinition;
     }
 
     @JsonIgnore
-    public void setPostDefinition(CellDefinition definition) {
+    public void setPostDefinition(CellDefinition<CellState> definition) {
         this.postDefinition = definition;
     }
 
@@ -116,7 +141,7 @@ public class Cell implements Serializable {
      * 
      * @param value is the usability frequency counter for this cell.
      */
-    public void setPufc(int value) {
+    public void setUfc(int value) {
         this.usabilityFrequencyCounter = value;
     }
 

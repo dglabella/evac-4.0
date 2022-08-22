@@ -21,7 +21,9 @@ public class StateController {
 
     @RequestMapping(value = "/{id}")
     public SavedState getAllStatesFromProject(@PathVariable String id) {
-        return this.stateService.getOne(id);
+        SavedState s = this.stateService.getOne(id);
+
+        return s;
     }
 
     // @PostMapping(consumes = {"application/json"})
@@ -33,13 +35,13 @@ public class StateController {
 
     @PostMapping
     public String stateRegister(@RequestBody byte[] savedStateCompressed) {
+        this.stateService.insert(savedStateCompressed);
         EnvironmentCompressor environmentCompressor = new EnvironmentCompressor();
         try {
-            environmentCompressor.uncompress(savedStateCompressed); a ver si recibe asi
+            byte[] uncompressedData = environmentCompressor.uncompress(savedStateCompressed);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.stateService.insert();
         return "Mandado";
     }
 }

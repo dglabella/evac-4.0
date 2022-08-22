@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.annotation.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ar.edu.unsl.evac.engine.domain.definitions.LambdaCellState;
 import ar.edu.unsl.evac.engine.domain.definitions.LambdaDefinition;
 import ar.edu.unsl.evac.engine.utils.CellularAutomatonParser;
 import ar.edu.unsl.evac.engine.utils.Loc;
+import ar.edu.unsl.evac.scenarios.gol.GameOfLifeCellState;
 
 public class CellularAutomaton implements Environment {
 
@@ -35,7 +37,7 @@ public class CellularAutomaton implements Environment {
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                this.cells[i][j] = new Cell(i, j, new LambdaDefinition());
+                this.cells[i][j] = new Cell(i, j, new LambdaDefinition<LambdaCellState>());
             }
         }
     }
@@ -84,11 +86,11 @@ public class CellularAutomaton implements Environment {
         return ret;
     }
 
-    public List<PropertiesBundle> obtainNeighborhoodCellsPropertiesBundles(int i, int j) {
-        List<PropertiesBundle> ret = new ArrayList<>();
+    public List<CellState> obtainNeighborhoodCellsPropertiesBundles(int i, int j) {
+        List<CellState> ret = new ArrayList<>();
 
         for (Cell cell : this.cells[i][j].getNeighborsCells()) {
-            ret.add(cell.getDef().getPropertiesBundle());
+            ret.add(cell.getDef().getState());
         }
 
         return ret;
@@ -101,7 +103,7 @@ public class CellularAutomaton implements Environment {
             for (int j = 0; j < this.width; j++) {
                 cell = this.cells[i][j];
                 cell.setPostDefinition(cell.getDef().applyRule(i, j, cell.getAgent(),
-                        cell.getNeighborhoodCellsPropertiesBundles()));
+                        cell.getNeighborhoodStates()));
             }
         }
 

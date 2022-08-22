@@ -6,10 +6,10 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import ar.edu.unsl.evac.engine.domain.CellularAutomaton;
 import ar.edu.unsl.evac.engine.utils.CellularAutomatonParser;
-import ar.edu.unsl.evac.engine.utils.EnvironmentGenerator;
+import ar.edu.unsl.evac.engine.utils.EnvironmentCompressor;
+import ar.edu.unsl.evac.engine.utils.EnvironmentParser;
 import ar.edu.unsl.evac.model.SavedState;
 import ar.edu.unsl.evac.repositories.StateRepository;
-import ar.edu.unsl.evac.scenarios.gol.GameOfLifePropertiesBundle;
 
 @Service
 public class StateService {
@@ -24,26 +24,19 @@ public class StateService {
     }
 
     @Async
-    public SavedState insert() {
-        SavedState s = new SavedState();
-        s.setId("628f5326b1ab917d52d82913");
-        s.setAnnotation("initial state from a game of life experiment");
-        s.setCurrentGeneration(65);
+    public SavedState insert(byte[] savedStateCompressed) {
+        EnvironmentCompressor environmentCompressor = new EnvironmentCompressor();
+        EnvironmentParser<CellularAutomaton> environmentParser = new CellularAutomatonParser();
 
-        // s.setEnvironmentData(new CellularAutomatonParser().parseStateToJson(
-        // (CellularAutomaton) new EnvironmentGenerator().generateEnvironment2(32, 32)));
+        try {
+            byte[] uncompressedData = environmentCompressor.uncompress(savedStateCompressed);
+            CellularAutomaton cellularAutomaton =
+                    environmentParser.parseStateToObject(new String(uncompressedData));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        s.setEnvironmentData(
-                (CellularAutomaton) new EnvironmentGenerator().generateEnvironment2(32, 32));
-
-        // System.out.println("cell[10][16] is alive?: "
-        // + ((GameOfLifePropertiesBundle) s.getEnvironmentData().getCells()[10][16].getDef()
-        // .getPropertiesBundle()).isAlive());
-
-        System.out.println("22222222222");
-        this.stateRepository.save(s);
-        System.out.println("3333333333333");
-        return s;
+        return this.stateRepository.save(new SavedState());
     }
 
     public SavedState update(SavedState state) {

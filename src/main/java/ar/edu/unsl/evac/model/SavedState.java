@@ -3,7 +3,6 @@ package ar.edu.unsl.evac.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import ar.edu.unsl.evac.engine.domain.CellularAutomaton;
 
 @Document(collection = "states")
 public class SavedState {
@@ -15,7 +14,7 @@ public class SavedState {
     @Field
     private int currentGeneration;
     @Field
-    private CellularAutomaton environmentData; // deflated data
+    private String environmentCompressedData; // deflated data
 
     public SavedState() {}
 
@@ -43,11 +42,11 @@ public class SavedState {
         this.currentGeneration = currentGeneration;
     }
 
-    public CellularAutomaton getEnvironmentData() {
-        return this.environmentData;
+    public String getEnvironmentCompressedData() {
+        return this.environmentCompressedData;
     }
 
-    public void setEnvironmentData(CellularAutomaton environmentData) {
-        this.environmentData = environmentData;
+    public void setEnvironmentCompressedData(String environmentCompressedData) {
+        this.environmentCompressedData = environmentCompressedData;
     }
 }

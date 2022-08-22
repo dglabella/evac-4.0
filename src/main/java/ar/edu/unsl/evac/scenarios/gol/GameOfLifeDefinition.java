@@ -1,26 +1,23 @@
 package ar.edu.unsl.evac.scenarios.gol;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import ar.edu.unsl.evac.engine.domain.Agent;
 import ar.edu.unsl.evac.engine.domain.CellDefinition;
-import ar.edu.unsl.evac.engine.domain.PropertiesBundle;
+import ar.edu.unsl.evac.engine.domain.CellState;
+import ar.edu.unsl.evac.engine.domain.Visitor;
 import ar.edu.unsl.evac.engine.utils.Loc;
 import ar.edu.unsl.evac.engine.utils.Neighborhood;
 
-public class GameOfLifeDefinition implements CellDefinition {
-
-    private GameOfLifePropertiesBundle propertiesBundle;
+public class GameOfLifeDefinition
+        implements CellDefinition<GameOfLifeCellState>, GameOfLifeVisitable {
 
     public GameOfLifeDefinition() {}
 
-    public GameOfLifeDefinition(GameOfLifePropertiesBundle propertiesBundle) {
-        this.propertiesBundle = propertiesBundle;
-    }
-
     @Override
-    public PropertiesBundle getPropertiesBundle() {
-        return (PropertiesBundle) this.propertiesBundle;
+    public GameOfLifeCellState stateSetUp() {
+        return new GameOfLifeCellState();
     }
 
     @Override
@@ -34,37 +31,41 @@ public class GameOfLifeDefinition implements CellDefinition {
     }
 
     @Override
-    public CellDefinition applyRule(int i, int j, Agent agent, List<PropertiesBundle> neighbors) {
+    public CellDefinition<? extends CellState> applyRule(int i, int j,
+            GameOfLifeCellState actualState, GameOfLifeCellState nextState, Agent agent,
+            List<? extends CellState> neighborStates) {
+
         int neighborsAlive = 0;
 
-        for (PropertiesBundle propertiesBundle : neighbors) {
-            if (((GameOfLifePropertiesBundle) propertiesBundle).isAlive())
+        for (CellState cellStates : neighborStates) {
+            if (cellStates.isAlive()) {
                 neighborsAlive++;
+            }
         }
 
-        if (this.propertiesBundle.isAlive()) {
-            this.propertiesBundle
-                    .setPostAlive((neighborsAlive == 2 || neighborsAlive == 3) ? true : false);
+        if (actualState.isAlive())
+
+        {
+            nextState.setAlive((neighborsAlive == 2 || neighborsAlive == 3) ? true : false);
         } else {
-            this.propertiesBundle.setPostAlive(neighborsAlive == 3 ? true : false);
+            nextState.setAlive(neighborsAlive == 3 ? true : false);
         }
 
-        return null;
+        return null; // null means "do not transmute"
     }
 
     @Override
-    public void update() {
-        this.propertiesBundle.setAlive(this.propertiesBundle.isPostAlive());
-    }
-
-    @Override
-    public String codification() {
-        return this.propertiesBundle.isAlive() ? " # " : "   ";
+    public String codification(GameOfLifeCellState actualState) {
+        return actualState.isAlive() ? " # " : "   ";
     }
 
     @Override
     public int typeId() {
-        // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    public void accept(GameOfLifeVisitor visitor) {
+        visitor.visit(cellstate);
     }
 }

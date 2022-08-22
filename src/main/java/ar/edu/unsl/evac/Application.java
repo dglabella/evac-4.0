@@ -7,9 +7,12 @@ import java.nio.file.Files;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ar.edu.unsl.evac.engine.Engine;
+import ar.edu.unsl.evac.engine.domain.CellularAutomaton;
 import ar.edu.unsl.evac.engine.utils.CellularAutomatonParser;
 import ar.edu.unsl.evac.engine.utils.EnvironmentCompressor;
 import ar.edu.unsl.evac.engine.utils.EnvironmentGenerator;
+import ar.edu.unsl.evac.engine.utils.EnvironmentParser;
+import ar.edu.unsl.evac.scenarios.gol.GameOfLifeCellState;
 import ar.edu.unsl.evac.utils.JsonStateGenerator;
 
 @SpringBootApplication
@@ -25,18 +28,19 @@ public class Application {
 
 	public static void main(String[] args) {
 		// executeEngine();
-		// generateState();
+		generateState();
+		// readCompressedDataAndMakeAPOJO();
 		// new JsonStateGenerator().generate();
 
-		SpringApplication.run(Application.class, args);
+		// SpringApplication.run(Application.class, args);
 	}
 
 	private static void generateState() {
-		int width = 32;
-		int height = 32;
+		int width = 4;
+		int height = 4;
 		CellularAutomatonParser parser = new CellularAutomatonParser();
 
-		Engine engine = new Engine(new EnvironmentGenerator().generateEnvironment2(width, height),
+		Engine engine = new Engine(new EnvironmentGenerator().generateEnvironment1(width, height),
 				1, null, parser);
 		System.out.println("Runnning Simulation...");
 		engine.execute();
@@ -45,11 +49,11 @@ public class Application {
 		System.out.println("Parsing...");
 		String jsonInitialState = engine.getRunGenerations().get(0);
 
-
 		// Save normal file...
 		try {
 			// Files.write(
-			// new File("C:\\Users\\dglab\\OneDrive\\Escritorio\\jacksonTest\\execution.json")
+			// new
+			// File("C:\\Users\\dglab\\OneDrive\\Escritorio\\jacksonTest\\execution.json")
 			// .toPath(),
 			// jsonExecution.getBytes(StandardCharsets.UTF_8));
 			Files.write(new File(
@@ -60,7 +64,8 @@ public class Application {
 			e.printStackTrace();
 		}
 
-		// Read bytes from the normal file, compress the data and save compressed data into new
+		// Read bytes from the normal file, compress the data and save compressed data
+		// into new
 		// file...
 		EnvironmentCompressor environmentCompressor = new EnvironmentCompressor();
 		try {
@@ -79,7 +84,25 @@ public class Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
+	private static void readCompressedDataAndMakeAPOJO() {
+		try {
+			byte[] data = Files.readAllBytes(new File(
+					"C:\\Users\\dglab\\OneDrive\\Escritorio\\jacksonTest\\initialStateCompressed.dat")
+							.toPath());
+
+			EnvironmentCompressor ec = new EnvironmentCompressor();
+			byte[] uncompressedData = ec.uncompress(data);
+
+			CellularAutomatonParser ep = new CellularAutomatonParser();
+			CellularAutomaton ca = ep.parseStateToObject(new String(uncompressedData));
+
+			System.out.println("LETS SEE IF IT IS ALIVE: "
+					+ ((GameOfLifeCellState) ca.getCells()[10][16].getDef().getState()).isAlive());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void executeEngine() {
@@ -100,13 +123,13 @@ public class Application {
 
 		jsonExecution += "}";
 
-
 		// ====================================================================================================================
 		// ====================================================================================================================
 		// Save normal file...
 		try {
 			// Files.write(
-			// new File("C:\\Users\\dglab\\OneDrive\\Escritorio\\jacksonTest\\execution.json")
+			// new
+			// File("C:\\Users\\dglab\\OneDrive\\Escritorio\\jacksonTest\\execution.json")
 			// .toPath(),
 			// jsonExecution.getBytes(StandardCharsets.UTF_8));
 			Files.write(
@@ -117,7 +140,8 @@ public class Application {
 			e.printStackTrace();
 		}
 
-		// Read bytes from the normal file, compress the data and save compressed data into new
+		// Read bytes from the normal file, compress the data and save compressed data
+		// into new
 		// file...
 		EnvironmentCompressor environmentCompressor = new EnvironmentCompressor();
 		try {
@@ -137,7 +161,8 @@ public class Application {
 			e.printStackTrace();
 		}
 
-		// Read compressed data from the file, uncompress it and saving the uncompressed data into a
+		// Read compressed data from the file, uncompress it and saving the uncompressed
+		// data into a
 		// new file...
 		try {
 			byte[] data = Files.readAllBytes(new File(
