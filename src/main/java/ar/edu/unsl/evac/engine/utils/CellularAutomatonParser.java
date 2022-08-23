@@ -27,7 +27,7 @@ public class CellularAutomatonParser implements EnvironmentParser<CellularAutoma
         String savedState =
                 "{\"_id\":{\"$oid\":\"628f5326b1ab917d52d82913\"},\"annotation\":\"initial state from a game of life experiment\",\"currentGeneration\":65,\"environmentData\":\"";
         savedState += new String(compressedState);
-        savedState += "\"}";
+        savedState += "\"}  ";
         return savedState;
     }
 
